@@ -188,7 +188,7 @@
                 </form>
               </div>
                   <!-- Departments menu-->
-                  <ul class="navbar-nav mega-nav pr-lg-2 mr-lg-2">
+                  <!-- <ul class="navbar-nav mega-nav pr-lg-2 mr-lg-2">
                     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle pl-0" href="#" data-toggle="dropdown"><i class="czi-view-grid mr-2"></i>Departments</a>
                       <div class="dropdown-menu px-2 pl-0 pb-4">
                         <div class="d-flex flex-wrap flex-md-nowrap">
@@ -226,13 +226,13 @@
                         
                       </div>
                     </li>
-                  </ul>
+                  </ul> -->
               <!-- Primary menu-->
-              <ul class="navbar-nav">
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{url('/')}}">Acceuil</a>
-                  
-                </li>       
-              </ul>
+                  <!-- <ul class="navbar-nav">
+                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{url('/')}}">Acceuil</a>
+                      
+                    </li>       
+                  </ul> -->
             </div>
           </div>
         </div>

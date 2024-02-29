@@ -95,25 +95,30 @@ class PagesAjoutController extends Controller
         $val = random_int(1, 10000);
         
         $article = new Article();
+        
 
             $fileNameWithExt = $request->file('image_1')->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $ext = $request->file('image_1')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'.'.$ext;
-            $path = $request->file('image_1')->storeAs('public/img/shop/catalog', $fileNameToStore);
+            $path = $request->file('image_1')->storeAs('img/shop/catalog', $fileNameToStore);
 
             $fileNameWithExt = $request->file('image_2')->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $fileName1 = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $ext = $request->file('image_2')->getClientOriginalExtension();
-            $fileNameToStore1 = $fileName.'.'.$ext;
-            $path = $request->file('image_2')->storeAs('public/img/shop/catalog', $fileNameToStore1);
+            $fileNameToStore1 = $fileName1.'.'.$ext;
+            $path = $request->file('image_2')->storeAs('img/shop/catalog', $fileNameToStore1);
 
             $fileNameWithExt = $request->file('image_3')->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $fileName2 = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $ext = $request->file('image_3')->getClientOriginalExtension();
-            $fileNameToStore2 = $fileName.'.'.$ext;
-            $path = $request->file('image_3')->storeAs('public/img/shop/catalog', $fileNameToStore2);
+            $fileNameToStore2 = $fileName2.'.'.$ext;
+            $path = $request->file('image_3')->storeAs('img/shop/catalog', $fileNameToStore2);
 
+            if ($path === false) {
+                // Gérer l'erreur de téléchargement du fichier
+                return back()->withErrors(['error' => 'Erreur lors de l\'enregistrement de l\'image 1']);
+            }
          
         
         $article->image_article = $fileNameToStore;

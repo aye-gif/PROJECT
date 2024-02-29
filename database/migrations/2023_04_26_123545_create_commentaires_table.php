@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('etoile');
             $table->mediumText('commentaire');
             $table->string('date');
-            $table->integer('like_comment');
-            $table->integer('dislike_comment');
+            $table->integer('like_comment')->nullable();
+            $table->integer('dislike_comment')->nullable();
             $table->timestamps();
         });
     }

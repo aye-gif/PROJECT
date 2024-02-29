@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('ref_mode_livraison');
             $table->string('libelle_mode_livraison')->default('magasin');
-            $table->string('valeur_mode_livraison');
+            $table->string('valeur_mode_livraison')->default('1500');
+            $table->timestamps();
         });
     }
 

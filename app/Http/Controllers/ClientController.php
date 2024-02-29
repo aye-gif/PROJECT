@@ -307,8 +307,8 @@ class ClientController extends Controller
        return redirect('/');
     }
 
-     //pour ajouter dans la table Info_adresse  des infos supplement en ce qui concerne le client
-     public function PlusInfo(Request $request){
+    //pour ajouter dans la table Info_adresse  des infos supplement en ce qui concerne le client
+    public function PlusInfo(Request $request){
         
         $this->validate($request,[
             
@@ -353,7 +353,7 @@ class ClientController extends Controller
         $cart = new Cart($oldCart);
 
         $Commande = new Commande();
-        $Commande->ref_commande = 'COMD'.Session('client')->nom;
+        $Commande->ref_commande = 'COMD'.substr(Session('client')->nom,0,4 ).time();
         $Commande->ref_info_adresse = $request->input('ref_info_adresse');
         $Commande->nom_client = Session('client')->nom;
         $Commande->prenom_client = Session('client')->prenoms;
@@ -362,6 +362,7 @@ class ClientController extends Controller
         $Commande->ville = $request->input('ville');
         $Commande->commune = $request->input('commune');
         $Commande->mode_livraison = Session('method_livraison');
+        $Commande->statut = 'etape1';
         $Commande->methode_paiement = Session('MethodPay');
         $Commande->cart = serialize($cart);
 
@@ -371,7 +372,7 @@ class ClientController extends Controller
 
         $SuivieCommande = new SuivieCommande();
         $SuivieCommande->ref_suivie_commande = 'SU'.'COMD'.substr(Session('client')->nom,0,2 ).time();
-        $SuivieCommande->ref_commande = 'COMD'.Session('client')->nom;
+        $SuivieCommande->ref_commande = 'COMD'.substr(Session('client')->nom,0,4 ).time();
         $SuivieCommande->methode_livraison = Session('method_livraison');
         $SuivieCommande->statut = 'etape1';
 

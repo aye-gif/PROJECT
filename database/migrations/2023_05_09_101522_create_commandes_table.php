@@ -17,15 +17,15 @@ return new class extends Migration
             $table->id();
             $table->string('ref_commande');
             $table->string('ref_info_adresse');
+            $table->string('nom_client');
             $table->string('prenom_client');
-            $table->string('prenom');
             $table->mediumText('adresse');
             $table->string('telephone');
             $table->string('ville');
             $table->string('commune');
             $table->string('mode_livraison');
             $table->string('methode_paiement');
-            $table->string('statut');
+            $table->string('statut')->default('etape1');
             $table->longtext('cart');
             $table->timestamps();
         });

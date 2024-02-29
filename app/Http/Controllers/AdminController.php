@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\Admin;
 use App\Models\Article;
-use App\Models\Categories;
+use App\Models\Categorie;
 use App\Models\Fournisseur;
 use App\Models\Commande;
 use App\Models\Client;
@@ -95,7 +95,7 @@ class AdminController extends Controller
         $affiche_article = DB::table('articles')->paginate(20);
 
         // cette requete me permet d'afficher les categories
-        $affiche_categorie = DB::table('categories')->get();
+        $affiche_categorie = DB::table('categorie')->get();
 
         // cette requete me permet d'afficher les marques
         $affiche_marque = DB::table('marques')->get();
@@ -114,7 +114,7 @@ class AdminController extends Controller
     public function AjouterCategorie(){
 
         // cette requete me permet d'afficher les categories
-        $affiche_categorie = DB::table('categories')->get();
+        $affiche_categorie = DB::table('categorie')->get();
 
         return view('admin.PagesAjout.AjouterCategorie',[
             'affiche_categorie' => $affiche_categorie

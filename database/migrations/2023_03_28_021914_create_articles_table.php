@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('ref_article');
             $table->string('Num_article');
-            $table->string('ref_detail');
+            $table->string('ref_detail')->nullable();
             $table->string('ref_categorie');
             $table->string('ref_marque');
             $table->string('ref_fournisseur');
-            $table->string('ref_client');
+            $table->string('ref_client')->nullable();
             $table->string('type_article');
             $table->mediumText('libelle_article');
             $table->string('image_article');

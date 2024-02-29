@@ -31,9 +31,9 @@
           <div class="cz-sidebar-static rounded-lg box-shadow-lg px-0 pb-0 mb-5 mb-lg-0">
             <div class="px-4 mb-4">
               <div class="media align-items-center">
-                <div class="img-thumbnail rounded-circle position-relative" style="width: 6.375rem;"><span class="badge badge-warning" data-toggle="tooltip" title="Reward points">384</span><img class="rounded-circle" src="img/shop/account/avatar.jpg" alt="Susan Gardner"></div>
+                <div class="img-thumbnail rounded-circle position-relative" style="width: 6.375rem;"><span class="badge badge-warning" data-toggle="tooltip" title="Reward points">{{Session::get('client')->id}}</span><img class="rounded-circle" src="{{ asset('img/shop/client/'.Session::get('client')->image_client) }}" alt="{{Session::get('client')->nom}}"></div>
                 <div class="media-body pl-3">
-                  <h3 class="font-size-base mb-0">Susan Gardner</h3><span class="text-accent font-size-sm">s.gardner@example.com</span>
+                  <h3 class="font-size-base mb-0">{{Session::get('client')->nom}} {{Session::get('client')->prenoms}}</h3><span class="text-accent font-size-sm">{{Session::get('client')->email}}</span>
                 </div>
               </div>
             </div>
@@ -41,9 +41,9 @@
               <h3 class="font-size-sm mb-0 text-muted">Tableau de bord</h3>
             </div>
             <ul class="list-unstyled mb-0">
-              <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{url('/client/orders')}}"><i class="czi-bag opacity-60 mr-2"></i>Commandes<span class="font-size-sm text-muted ml-auto">1</span></a></li>
-              <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{url('/client/wishlist',[Session('client')->ref_client])}}"><i class="czi-heart opacity-60 mr-2"></i>Favories<span class="font-size-sm text-muted ml-auto">3</span></a></li>
-              <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 active" href="{{url('/client/tickets')}}"><i class="czi-help opacity-60 mr-2"></i>Billets d'assistance<span class="font-size-sm text-muted ml-auto">1</span></a></li>
+              <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 active" href="{{url('/client/orders')}}"><i class="czi-bag opacity-60 mr-2"></i>Commandes<span class="font-size-sm text-muted ml-auto"></span></a></li>
+              <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{url('/client/wishlist',[Session('client')->ref_client])}}"><i class="czi-heart opacity-60 mr-2"></i>Favories<span class="font-size-sm text-muted ml-auto"></span></a></li>
+              <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{url('/client/tickets')}}"><i class="czi-help opacity-60 mr-2"></i>Billets d'assistance<span class="font-size-sm text-muted ml-auto"></span></a></li>
             </ul>
             <div class="bg-secondary px-4 py-3">
               <h3 class="font-size-sm mb-0 text-muted">Paramètres du compte</h3>

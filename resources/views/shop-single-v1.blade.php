@@ -36,17 +36,17 @@
             <div class="col-lg-7 pr-lg-0 pt-lg-4">
               <div class="cz-product-gallery">
                 <div class="cz-preview order-sm-2">
-                  <div class="cz-preview-item active" id="first"><img class="cz-image-zoom" src="{{ asset('storage/img/shop/catalog/'.$affiche_info_article->image_article) }}" data-zoom="{{ asset('img/shop/catalog/'.$affiche_info_article->image_article) }}" alt="Product image">
+                  <div class="cz-preview-item active" id="first"><img class="cz-image-zoom" src="{{ asset('img/shop/catalog/'.$affiche_info_article->image_article) }}" data-zoom="{{ asset('img/shop/catalog/'.$affiche_info_article->image_article) }}" alt="Product image">
                     <div class="cz-image-zoom-pane"></div>
                   </div>
-                  <div class="cz-preview-item" id="second"><img class="cz-image-zoom" src="{{ asset('storage/img/shop/catalog/'.$affiche_info_article->image2_article) }}" data-zoom="{{ asset('img/shop/catalog/'.$affiche_info_article->image2_article) }}" alt="Product image">
+                  <div class="cz-preview-item" id="second"><img class="cz-image-zoom" src="{{ asset('img/shop/catalog/'.$affiche_info_article->image2_article) }}" data-zoom="{{ asset('img/shop/catalog/'.$affiche_info_article->image2_article) }}" alt="Product image">
                     <div class="cz-image-zoom-pane"></div>
                   </div>
-                  <div class="cz-preview-item" id="third"><img class="cz-image-zoom" src="{{ asset('storage/img/shop/catalog/'.$affiche_info_article->image3_article) }}" data-zoom="{{ asset('img/shop/catalog/'.$affiche_info_article->image3_article) }}" alt="Product image">
+                  <div class="cz-preview-item" id="third"><img class="cz-image-zoom" src="{{ asset('img/shop/catalog/'.$affiche_info_article->image3_article) }}" data-zoom="{{ asset('img/shop/catalog/'.$affiche_info_article->image3_article) }}" alt="Product image">
                     <div class="cz-image-zoom-pane"></div>
                   </div>
                 </div>
-                <div class="cz-thumblist order-sm-1"><a class="cz-thumblist-item active" href="#first"><img src="{{ asset('storage/img/shop/catalog/'.$affiche_info_article->image_article) }}" alt="Product thumb"></a><a class="cz-thumblist-item" href="#second"><img src="{{ asset('storage/img/shop/catalog/'.$affiche_info_article->image2_article) }}" alt="Product thumb"></a><a class="cz-thumblist-item" href="#third"><img src="{{ asset('storage/img/shop/catalog/'.$affiche_info_article->image3_article) }}" alt="Product thumb"></a><a class="cz-thumblist-item video-item" href="https://www.youtube.com/watch?v=1vrXpMLLK14">
+                <div class="cz-thumblist order-sm-1"><a class="cz-thumblist-item active" href="#first"><img src="{{ asset('img/shop/catalog/'.$affiche_info_article->image_article) }}" alt="Product thumb"></a><a class="cz-thumblist-item" href="#second"><img src="{{ asset('img/shop/catalog/'.$affiche_info_article->image2_article) }}" alt="Product thumb"></a><a class="cz-thumblist-item" href="#third"><img src="{{ asset('img/shop/catalog/'.$affiche_info_article->image3_article) }}" alt="Product thumb"></a><a class="cz-thumblist-item video-item" href="https://www.youtube.com/watch?v=1vrXpMLLK14">
                     <div class="cz-thumblist-item-text"><i class="czi-video"></i>Video</div></a></div>
               </div>
             </div>

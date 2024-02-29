@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('detail_articles', function (Blueprint $table) {
             $table->id();
             $table->string('ref_detail_article');
-            $table->string('ref_article');
             $table->string('libelle1');
             $table->string('valeur1');
             $table->string('libelle2');

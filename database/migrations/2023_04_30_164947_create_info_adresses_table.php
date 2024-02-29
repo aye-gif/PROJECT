@@ -22,8 +22,10 @@ return new class extends Migration
             $table->string('ville');
             $table->string('commune');
             $table->string('quartier');
+            $table->string('statut')->default('actuel');
             $table->string('info_supplementaire');
             $table->string('sauvegarde')->default('non');
+            $table->timestamps();
         });
     }
 

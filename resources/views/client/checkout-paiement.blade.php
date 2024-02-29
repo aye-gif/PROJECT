@@ -106,7 +106,7 @@
                     </div>
                   </div>
                 </div>
-                {{-- <div class="card">
+                <!-- <div class="card">
                   <div class="card-header" role="tab">
                     <h3 class="accordion-heading"><a class="collapsed" href="#paypal" data-toggle="collapse"><i class="czi-paypal mr-2 align-middle"></i>Payer avec PayPal<span class="accordion-indicator"></span></a></h3>
                   </div>
@@ -118,8 +118,8 @@
                       </div>
                     </div>
                   </div>
-                </div> --}}
-                <div class="card">
+                </div>  -->
+                <!-- <div class="card">
                   <div class="card-header" role="tab">
                     <h3 class="accordion-heading"><a href="#card" data-toggle="collapse"><i class="czi-card font-size-lg mr-2 mt-n1 align-middle"></i>Payez a partir d'un compte mobile money<span class="accordion-indicator"></span></a></h3>
                   </div>
@@ -134,7 +134,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
               
               </div>
               <!-- Navigation (desktop)-->

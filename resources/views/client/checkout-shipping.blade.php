@@ -127,7 +127,7 @@
                             <td class="align-middle">Tous les jours</td>
                             <td class="align-middle">0 fr</td>
                           </tr>
-                      </form>
+                      
                     </tbody>
                   </table>
                 </div>

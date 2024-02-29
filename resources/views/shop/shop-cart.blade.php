@@ -28,7 +28,7 @@
         <!-- List of items-->
         <section class="col-lg-8">
           <div class="d-flex justify-content-between align-items-center pt-3 pb-2 pb-sm-5 mt-1">
-            <h2 class="h6 text-light mb-0">Produits</h2><a class="btn btn-outline-primary btn-sm pl-2" href="{{'/plus'}}"><i class="czi-arrow-left mr-2"></i>Continuer vos achats</a>
+            <h2 class="h6 text-light mb-0">Produits</h2><a class="btn btn-outline-primary btn-sm pl-2" href="{{'/'}}"><i class="czi-arrow-left mr-2"></i>Continuer vos achats</a>
           </div>
           @if (Session::has('topCart'))
               @foreach (Session::get('topCart') as $resultat)

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('ref_info_livraison');
             $table->string('ville');
             $table->string('quartier');
+            $table->timestamps();
         });
     }
 
