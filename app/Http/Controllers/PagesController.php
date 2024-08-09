@@ -122,7 +122,7 @@ class PagesController extends Controller
     public function info($ref_article){
 
         // cette requete me permet d'afficher les info de l'article selectionne     
-        $affiche_info_article = DB::table('articles')->join('couleurs', 'articles.ref_article', '=' , 'couleurs.ref_article')->join('detail_articles', 'detail_articles.ref_article', '=' , 'articles.ref_article')->where('articles.ref_article','=',$ref_article)->first();
+        $affiche_info_article = DB::table('articles')->join('couleurs', 'articles.ref_article', '=' , 'couleurs.ref_article')->join('detail_articles', 'detail_articles.ref_detail_article', '=' , 'articles.ref_detail')->where('articles.ref_article','=',$ref_article)->first();
  
         // cette requete me permet d'afficher la couleur sur un article selectionne
         $affiche_couleur_article = DB::table('couleurs')->where('couleurs.ref_article','=',$ref_article)->get();
@@ -131,7 +131,7 @@ class PagesController extends Controller
         $affiche_taille_article = DB::table('taille_articles')->where('taille_articles.ref_article','=',$ref_article)->get();
 
         // cette requete me permet d'afficher les detail sur l'article selectionne
-        $affiche_detail_article = DB::table('detail_articles')->where('detail_articles.ref_article','=',$ref_article)->first();
+        $affiche_detail_article = DB::table('detail_articles')->join('articles', 'articles.ref_detail', '=' , 'detail_articles.ref_detail_article')->where('articles.ref_article','=',$ref_article)->first();
         
         // cette requete me permet de gerer les commentaires en ce qui concerne l'article selectionne
         $affiche_commentaire_article = DB::table('commentaires')->where('ref_article','=',$ref_article)->take(5)->get();
