@@ -38,6 +38,9 @@ use App\Http\Controllers\PaiementCinetpayController;
     //pour acceder au tableau de bord admin
     Route::post('/adminaccount', [AdminController::class, 'adminaccount']);
 
+     //pour acceder au tableau de bord admin
+     Route::get('/admin/ListeTransaction', [AdminController::class, 'ListeTransaction']);
+
     //pour acceder au tableau de bord admin
     Route::get('/admin/ListeSuivieCommande', [AdminController::class, 'ListeSuivieCommande']);
                     //pour modifier un suivie commande
@@ -51,7 +54,10 @@ use App\Http\Controllers\PaiementCinetpayController;
     //pour acceder a la page produit
     Route::get('/admin/ListeArticle', [AdminController::class, 'ListeArticle']);
                     //pour ajouter un article
-                    Route::post('/admin/NewArticle', [PagesAjoutController::class, 'NewArticle']);  
+                    Route::post('/admin/NewArticle', [PagesAjoutController::class, 'NewArticle']); 
+                    
+                    //pour ajouter un article
+                    Route::get('/admin/VoirArticle/{id}', [AdminController::class, 'VoirArticle']); 
 
     //pour acceder a la page ajouter un article dans la base de donnee
     Route::get('/admin/AjouterArticle', [AdminController::class, 'AjouterArticle']);
@@ -87,6 +93,27 @@ use App\Http\Controllers\PaiementCinetpayController;
     //pour voir le pdf  de la commande passer
     Route::get('/admin/VoirCommande/{id}', [PDFcontroller::class, 'VoirPdf']);
 
+    //pour 
+    Route::get('/admin/ListeClient', [AdminController::class, 'ListeClient']);
+
+    //pour 
+    Route::get('/admin/infoCommande/{id}', [AdminController::class, 'infoCommande']);
+
+    //pour 
+    Route::get('/admin/voirCommande/{id}', [AdminController::class, 'voirCommande']);
+
+    //pour 
+    Route::get('/admin/etapeCommande/{ref_commande}', [AdminController::class, 'etapeCommande']);
+
+    //pour 
+    Route::get('/admin/infoTransaction/{id}', [AdminController::class, 'infoTransaction']);
+
+    //pour 
+    Route::post('/admin/Search/transaction', [AdminController::class, 'SearchTransaction']);
+
+    //pour 
+    Route::get('/admin/TransactionValidate/{transactionId}/{IdContenu}', [AdminController::class, 'TransactionValidate']);
+
                  //..... en ce qui les pages qui manipulation des articles et autres
 
     //pour gere le corp de ma page
@@ -118,7 +145,7 @@ use App\Http\Controllers\PaiementCinetpayController;
     Route::post('/client/MethodPay', [ClientController::class, 'MethodPay']);
 
     //pour gere les favories
-    Route::get('/favories/{ref_article}', [ClientController::class, 'favories']);
+    Route::get('/favories/{id_article}', [ClientController::class, 'favories']);
 
     //pour afficher la page vois plus d'article
     Route::get('/plus', [PagesController::class, 'plus']);
@@ -127,7 +154,7 @@ use App\Http\Controllers\PaiementCinetpayController;
     Route::get('/cart', [PagesController::class, 'cart']);
 
     // pour afficher les informations sur un article selectionner
-    Route::get('/{ref_article}', [PagesController::class, 'info']);
+    Route::get('article/{id}', [PagesController::class, 'info']);
 
     // pour afficher les articles de meme type et categorie
     Route::get('/type/{type_article}', [PagesController::class, 'type']);
@@ -163,7 +190,7 @@ use App\Http\Controllers\PaiementCinetpayController;
     
     //pour accede a la page orders etant dans le compte du client
     Route::get('/client/orders', [ClientController::class, 'orders']);
-    Route::get('/client/wishlist/{ref_client}', [ClientController::class, 'wishlist']);
+    Route::get('/client/wishlist/{id_client}', [ClientController::class, 'wishlist']);
     Route::get('/client/tickets', [ClientController::class, 'tickets']);
     Route::get('/client/address', [ClientController::class, 'address']);
     Route::get('/client/payment', [ClientController::class, 'payment']);
@@ -173,7 +200,7 @@ use App\Http\Controllers\PaiementCinetpayController;
 
    
    //pour supprimer un article dans present dans les favories
-   Route::get('/client/wishlist/Remove/{ref_article}', [ClientController::class, 'RemoveFavorie']);
+   Route::get('/client/wishlist/Remove/{article_id}', [ClientController::class, 'RemoveFavorie']);
 
    
                         //..... en ce qui concerne le panier

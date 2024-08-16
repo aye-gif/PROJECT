@@ -13,7 +13,6 @@
                         <div class="card-header border-bottom">
                             <div class="d-sm-flex justify-content-between align-items-center">
                                 <h5 class="mb-2 mb-sm-0">Liste des Catégories</h5>
-                                <a href="{{url('#AjoutArticle')}}" class="btn btn-sm btn-primary mb-0">AJOUTER</a>
                             </div>
                         </div>
                         <!-- Card header END -->
@@ -26,27 +25,27 @@
                             <div class="table-responsive border-0">
                                 <table class="table align-middle p-4 mb-0 table-hover table-shrink">
                                     <!-- Table head -->
-                                    <thead class="table-light">
+                                    <thead class="table-dark">
                                         <tr>
-                                            <th scope="col" class="border-0 rounded-start">#</th>
-                                            <th scope="col" class="border-0">Rèference article</th>
-                                            <th scope="col" class="border-0">Numéro article</th>
-                                            <th scope="col" class="border-0 rounded-end text-center">Action</th>
+                                            <th scope="col" class="border-0 rounded-start text-center">#</th>
+                                            <th scope="col" class="border-0 text-center">Rèference catégorie</th>
+                                            <th scope="col" class="border-0 text-center">Libellé catégorie</th>
+                                            {{-- <th scope="col" class="border-0 rounded-end text-center">Action</th> --}}
                                         </tr>
                                     </thead>
 
                                     <!-- Table body START -->
                                     <tbody class="border-top-0">
                                         <!-- Table item -->
-                                        @foreach ($affiche_article as $resultat)
+                                        @foreach ($affiche_categorie as $resultat)
                                             <tr>
-                                                <td> <h6 class="mb-0">{{$resultat->id}}</h6> </td>
-                                                <td> <h6 class="mb-0"><a href="#">{{$resultat->ref_article}}</a></h6> </td>
-                                                <td> <h6 class="mb-0"><a href="#">{{$resultat->ref_categorie}}</a></h6></td>
-                                                <td class="text-center"> 
+                                                <td> <h6 class="mb-0 text-center">{{$resultat->id}}</h6> </td>
+                                                <td> <h6 class="mb-0 text-center"><a href="#">{{$resultat->ref_categorie}}</a></h6> </td>
+                                                <td> <h6 class="mb-0 text-center"><a href="#">{{$resultat->libelle_categorie}}</a></h6></td>
+                                                {{-- <td class="text-center"> 
                                                     <a href="" class="btn btn-sm btn-primary mb-0">Modifier</a>
                                                     <a href="" class="btn btn-sm btn-danger mb-0">Supprimer</a>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endforeach
 
@@ -100,22 +99,22 @@
                                     <!-- Sidebar menu item START -->
                                     <ul class="nav nav-pills-primary-soft flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="#"><i class="bi bi-person fa-fw me-2"></i>Mes articles</a>
+                                            <a class="nav-link active" href="{{url('admin/AjouterArticle')}}"><i class="bi bi-list-ul fa-fw me-2"></i>Mes articles</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{url('admin/AjouterCategorie')}}"><i class="bi bi-ticket-perforated fa-fw me-2"></i>Catégories</a>
+                                            <a class="nav-link" href="{{url('admin/AjouterCategorie')}}"><i class="bi bi-collection fa-fw me-2"></i>Catégories</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{url('admin/AjouterDetail')}}"><i class="bi bi-people fa-fw me-2"></i>Details</a>
+                                            <a class="nav-link" href="{{url('admin/AjouterDetail')}}"><i class="bi bi-info-circle fa-fw me-2"></i>Details</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{url('admin/AjouterTaille')}}"><i class="bi bi-people fa-fw me-2"></i>Taille article</a>
+                                            <a class="nav-link" href="{{url('admin/AjouterTaille')}}"><i class="bi bi-rulers fa-fw me-2"></i>Taille article</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{url('admin/AjouterMarque')}}"><i class="bi bi-wallet fa-fw me-2"></i>Marques</a>
+                                            <a class="nav-link" href="{{url('admin/AjouterMarque')}}"><i class="bi bi-patch-check fa-fw me-2"></i>Marques</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{url('admin/AjouterFournisseur')}}"><i class="bi bi-heart fa-fw me-2"></i>Fournisseur</a>
+                                            <a class="nav-link" href="{{url('admin/AjouterFournisseur')}}"><i class="bi bi-truck fa-fw me-2"></i>Fournisseur</a>
                                         </li>
                                        
                                     </ul>
@@ -156,7 +155,7 @@
                                     <!-- image article 1 -->
                                     <div class="col-12">
                                         <div class="input-group mb-3">
-                                            <input type="hidden" class="form-control" id="inputGroupFile02" name="id" value="" required>
+                                            <input type="hidden" class="form-control" id="inputGroupFile02" name="id" accept=".png, .jpeg, .jpg" value="" required>
                                             <input type="file" class="form-control" id="inputGroupFile02" name="image_1" required>
                                             <label class="input-group-text" for="inputGroupFile02">Image 1</label>
                                         </div>  
@@ -165,7 +164,7 @@
                                     <!-- image article 2 -->
                                     <div class="col-12">
                                         <div class="input-group mb-3">
-                                            <input type="file" class="form-control" id="inputGroupFile02" name="image_2" required>
+                                            <input type="file" class="form-control" id="inputGroupFile02" name="image_2" accept=".png, .jpeg, .jpg" required>
                                             <label class="input-group-text" for="inputGroupFile02">Image 2</label>
                                         </div>  
                                     </div>
@@ -173,7 +172,7 @@
                                     <!-- image article 3 -->
                                     <div class="col-12">
                                         <div class="input-group mb-3">
-                                            <input type="file" class="form-control" id="inputGroupFile02" name="image_3" required>
+                                            <input type="file" class="form-control" id="inputGroupFile02" name="image_3" accept=".png, .jpeg, .jpg" required>
                                             <label class="input-group-text" for="inputGroupFile02">Image 3</label>
                                         </div>  
                                     </div>
@@ -187,11 +186,11 @@
                                     <!-- Reference categorie -->
                                     <div class="col-md-6">
                                         <label class="form-label">Réference Categorie<span class="text-danger">*</span></label>
-                                        <select class="form-select js-choice" name="ref_categorie" required>
+                                        <select class="form-select js-choice" name="id_categorie" required>
                                             <option value="">Sélectionner une catégorie</option>
 
                                             @foreach ($affiche_categorie as $resultat)
-                                                <option value="{{$resultat->ref_categorie}}">{{$resultat->libelle_categorie}}</option>
+                                                <option value="{{$resultat->id}}">{{$resultat->libelle_categorie}}</option>
                                             @endforeach
                                             
                                         </select>
@@ -200,11 +199,11 @@
                                     <!-- Reference marques -->
                                     <div class="col-md-6">
                                         <label class="form-label">Réference marque<span class="text-danger">*</span></label>
-                                        <select class="form-select js-choice" name="ref_marque" required>
+                                        <select class="form-select js-choice" name="id_marque" required>
                                             <option value="">Sélectionner une marque</option>
 
                                             @foreach ($affiche_marque as $resultat)
-                                                <option value="{{$resultat->ref_marque}}">{{$resultat->libelle_marque}}</option>
+                                                <option value="{{$resultat->id}}">{{$resultat->libelle_marque}}</option>
                                             @endforeach
                                             
                                         </select>
@@ -213,11 +212,11 @@
                                     <!-- Reference fournisseurs -->
                                     <div class="col-md-6">
                                         <label class="form-label">Réference fournisseurs<span class="text-danger">*</span></label>
-                                        <select class="form-select js-choice" name="ref_fournisseur" required>
+                                        <select class="form-select js-choice" name="id_fournisseur" required>
                                             <option value="">Sélectionner un fournisseurs</option>
 
                                             @foreach ($affiche_fournisseur as $resultat)
-                                                <option value="{{$resultat->ref_fournisseur}}">{{$resultat->libelle_fournisseur}}</option>
+                                                <option value="{{$resultat->id}}">{{$resultat->libelle_fournisseur}}</option>
                                             @endforeach
                                             
                                         </select>
@@ -227,6 +226,19 @@
                                     <div class="col-md-6">
                                         <label class="form-label">Type article<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" placeholder="Type article" name="type_article" required>
+                                    </div>
+
+                                    <!-- Reference fournisseurs -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Détail<span class="text-danger">*</span></label>
+                                        <select class="form-select js-choice" name="id_detail" required>
+                                            <option value="">Sélectionner un détail</option>
+
+                                            @foreach ($affiche_detail as $resultat)
+                                                <option value="{{$resultat->id}}">{{$resultat->ref_detail_article}}</option>
+                                            @endforeach
+                                            
+                                        </select>
                                     </div>
     
                                     <!-- libelle article -->

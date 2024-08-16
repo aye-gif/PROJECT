@@ -14,7 +14,6 @@
                         <div class="card-header border-bottom">
                             <div class="d-sm-flex justify-content-between align-items-center">
                                 <h5 class="mb-2 mb-sm-0">Liste des Catégories</h5>
-                                <a href="" class="btn btn-sm btn-primary mb-0">AJOUTER</a>
                             </div>
                         </div>
                         <!-- Card header END -->
@@ -27,12 +26,12 @@
                             <div class="table-responsive border-0">
                                 <table class="table align-middle p-4 mb-0 table-hover table-shrink">
                                     <!-- Table head -->
-                                    <thead class="table-light">
+                                    <thead class="table-dark">
                                         <tr>
-                                            <th scope="col" class="border-0 rounded-start">#</th>
-                                            <th scope="col" class="border-0">Rèference catégorie</th>
-                                            <th scope="col" class="border-0">liebelle categorie</th>
-                                            <th scope="col" class="border-0 rounded-end text-center">Action</th>
+                                            <th scope="col" class="border-0 rounded-start text-center">#</th>
+                                            <th scope="col" class="border-0 text-center">Rèference catégorie</th>
+                                            <th scope="col" class="border-0 text-center">liebelle categorie</th>
+                                            {{-- <th scope="col" class="border-0 rounded-end text-center">Action</th> --}}
                                         </tr>
                                     </thead>
 
@@ -41,13 +40,13 @@
                                         <!-- Table item -->
                                         @foreach ($affiche_categorie as $resultat)
                                             <tr>
-                                                <td> <h6 class="mb-0">{{$resultat->id}}</h6> </td>
-                                                <td> <h6 class="mb-0"><a href="#">{{$resultat->ref_categorie}}</a></h6> </td>
-                                                <td> <h6 class="mb-0"><a href="#">{{$resultat->libelle_categorie}}</a></h6></td>
-                                                <td> 
+                                                <td> <h6 class="mb-0 text-center">{{$resultat->id}}</h6> </td>
+                                                <td> <h6 class="mb-0 text-center"><a href="#">{{$resultat->ref_categorie}}</a></h6> </td>
+                                                <td> <h6 class="mb-0 text-center"><a href="#">{{$resultat->libelle_categorie}}</a></h6></td>
+                                                {{-- <td> 
                                                     <a href="" class="btn btn-sm btn-primary mb-0">Modifier</a>
                                                     <a href="" class="btn btn-sm btn-danger mb-0">Supprimer</a>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endforeach
 
@@ -98,22 +97,22 @@
                                     <!-- Sidebar menu item START -->
                                     <ul class="nav nav-pills-primary-soft flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{url('admin/AjouterArticle')}}"><i class="bi bi-person fa-fw me-2"></i>Mes articles</a>
+                                            <a class="nav-link" href="{{url('admin/AjouterArticle')}}"><i class="bi bi-list-ul fa-fw me-2"></i>Mes articles</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="{{url('admin/AjouterCategorie')}}"><i class="bi bi-ticket-perforated fa-fw me-2"></i>Catégories</a>
+                                            <a class="nav-link active" href="{{url('admin/AjouterCategorie')}}"><i class="bi bi-collection fa-fw me-2"></i>Catégories</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{url('admin/AjouterDetail')}}"><i class="bi bi-people fa-fw me-2"></i>Details</a>
+                                            <a class="nav-link" href="{{url('admin/AjouterDetail')}}"><i class="bi bi-info-circle fa-fw me-2"></i>Details</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{url('admin/AjouterTaille')}}"><i class="bi bi-people fa-fw me-2"></i>Taille article</a>
+                                            <a class="nav-link" href="{{url('admin/AjouterTaille')}}"><i class="bi bi-rulers fa-fw me-2"></i>Taille article</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{url('admin/AjouterMarque')}}"><i class="bi bi-wallet fa-fw me-2"></i>Marques</a>
+                                            <a class="nav-link" href="{{url('admin/AjouterMarque')}}"><i class="bi bi-patch-check fa-fw me-2"></i>Marques</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{url('admin/AjouterFournisseur')}}"><i class="bi bi-heart fa-fw me-2"></i>Fournisseur</a>
+                                            <a class="nav-link" href="{{url('admin/AjouterFournisseur')}}"><i class="bi bi-truck fa-fw me-2"></i>Fournisseur</a>
                                         </li>
                                        
                                     </ul>

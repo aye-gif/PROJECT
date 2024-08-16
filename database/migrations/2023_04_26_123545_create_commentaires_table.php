@@ -15,16 +15,17 @@ return new class extends Migration
     {
         Schema::create('commentaires', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('article_id');
             $table->string('ref_commentaire');
-            $table->string('ref_article');
             $table->string('nom');
             $table->string('email');
             $table->string('etoile');
             $table->mediumText('commentaire');
-            $table->string('date');
             $table->integer('like_comment')->nullable();
             $table->integer('dislike_comment')->nullable();
             $table->timestamps();
+
+            $table->foreign('article_id')->references('id')->on('articles');
         });
     }
 

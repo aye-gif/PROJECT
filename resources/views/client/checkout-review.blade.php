@@ -108,15 +108,14 @@
                   <li><span class="text-muted">Télephone :&nbsp;</span>+225 {{Session('client')->telephone}}</li>
                   <li><span class="text-muted">Mode de livraison :&nbsp;</span>{{Session('method_livraison')}}</li>
                 </ul>
-                <input type="hidden" name="ref_info_adresse" value="{{$affiche_address_client->ref_info_adresse}}">
-                <input type="hidden" name="adresse" value="{{$affiche_address_client->adresse}}">
-                <input type="hidden" name="ville" value="{{$affiche_address_client->ville}}">
-                <input type="hidden" name="commune" value="{{$affiche_address_client->commune}}">
+                <input type="hidden" name="id_info_adresse" value="{{$affiche_address_client->id}}">
               </div>
               <div class="col-sm-6">
                 <h4 class="h6">Mode de paiement :</h4>
                 <ul class="list-unstyled font-size-sm">
-                  <li><span class="text-muted">****   {{Session('MethodPay')}}  ****&nbsp;</span></li>
+                  <li><span class="text-muted">{{Session('MethodPay')}} Fcfa / jours &nbsp;</span></li>
+                  <li><span class="text-muted">Nombre de jours : {{number_format(floor(Session::get('cart')->totalPrice / Session('MethodPay'))) }} </span></li>
+                  <li><span class="text-muted">+ {{number_format(Session('reste')  ) }} Fcfa</span></li>
                 </ul>
               </div>
             </div>

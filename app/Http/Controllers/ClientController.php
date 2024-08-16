@@ -10,12 +10,14 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Article;
 use App\Models\Cart;
 use App\Models\Client;
+use App\Models\Transaction;
 use App\Models\Favorie; 
-use App\Models\Info_adresse;
+use App\Models\InfoAdresse;
 use App\Models\CodePromo;
 use App\Models\Commande;
 use App\Models\SuivieCommande;
 use App\Mail\TestMail;
+use Carbon\Carbon;
 
 class ClientController extends Controller
 {
@@ -23,8 +25,8 @@ class ClientController extends Controller
     public function checkout(){
 
             if(Session::has('client')){
-                 $ref = Session('client')->ref_client;
-                 $affiche_adresses = DB::table('info_adresses')->where('ref_client','=',$ref)->first();
+                 $id = Session('client')->id;
+                 $affiche_adresses = InfoAdresse::where('client_id','=',$id)->first();
                     if($affiche_adresses){
 
                         return view('client.checkout-shipping');
@@ -34,9 +36,6 @@ class ClientController extends Controller
             }
     return redirect('/client/signin');
     }
-
-
-    
 
     // pour gerer la methode de livraison
     public function Expedition(Request $request){
@@ -52,8 +51,6 @@ class ClientController extends Controller
 
         return view('client.checkout-paiement');
     }
-
-
 
     // pour gerer le code promo
     public function CodePromo(Request $request){
@@ -72,31 +69,23 @@ class ClientController extends Controller
         return back()->with('codenonvalid','Code promo non valide');
     }
 
-
-
     //
     public function shipping(){
 
         return view('client.checkout-shipping');
     }
 
-
-
     //pour l'ajout d'un article comme favories
-    public function favories(Request $request, $ref_article){
+    public function favories($id_article){
         
         if(Session::has('client')){
-            $ref = Session('client')->ref_client;
-            $verifie = DB::table('favories')->where('ref_article','=',$ref_article)->where('ref_client','=',$ref)->first();
-            if($verifie){ 
-                
-            }
-            else{
-
+            $id = Session('client')->id;
+            $verifie = Favorie::where('article_id','=',$id_article)->where('client_id','=',$id)->first();
+            if(!$verifie){ 
+            
                 $favorie = new Favorie();
-                $favorie->ref_article = $ref_article;
-                $favorie->ref_client = Session('client')->ref_client;
-    
+                $favorie->article_id = $id_article;
+                $favorie->client_id = $id ;
                 $favorie->save();
             }
 
@@ -106,15 +95,15 @@ class ClientController extends Controller
 
 
      //pour supprimer un article considere comme article favorie par un client
-    public function RemoveFavorie($ref_article){
+    
+     public function RemoveFavorie($article_id){
 
-        $ref = Session('client')->ref_client;
-        $RemoveFavorie = DB::table('favories')->where('ref_article','=',$ref_article)->where('ref_client','=',$ref)->delete();
+        $id = Session('client')->id;
+        $RemoveFavorie = Favorie::where('article_id', $article_id)->where('client_id', $id)->delete();
     
         return back();
 
     }
-
 
     // pour avoir la methode de paiement
     public function MethodPay(Request $request){
@@ -123,32 +112,30 @@ class ClientController extends Controller
 
        if(Session::has('client')) {
 
-            $ref = Session('client')->ref_client;
-            $affiche_address_client = DB::table('info_adresses')->where('ref_client','=',$ref)->first();
+            $Idclient = Session('client')->id;
+            $affiche_address_client = DB::table('info_adresses')->where('client_id','=',$Idclient)->first();
 
         }
 
-        Session()->put('MethodPay',$Paiement);
+        $reste = Session('cart')->totalPrice % $request->input('Paiement');
 
-        return view('client.checkout-review',[
-            'affiche_address_client' => $affiche_address_client
-        ]);
+            Session()->put('MethodPay',$Paiement);
+            Session()->put('reste',$reste);
+
+            return view('client.checkout-review',[
+                'affiche_address_client' => $affiche_address_client
+            ]);
         
     }
-
-
 
     public function review(){
 
         return view('client.checkout-review');
     }
 
-
-
     public function signin(){
         return view('client.account-signin');
     }
-
 
     //pour la creation du compte utilisateur
     public function createaccount(Request $request){
@@ -175,7 +162,6 @@ class ClientController extends Controller
         return back()->with('status','Votre compte à été créé avec succès !!, Veuillez svp vous connecter');
     }
 
-
     //pour la connexion au compte utilisateur
     public function accessaccount(Request $request){
 
@@ -197,8 +183,6 @@ class ClientController extends Controller
         return back()->with('error', "Vous n'avez pas de compte avec cet email");
     }
 
-
-
     //pour la connexion au compte utilisateur
     public function account($ref_client){
         
@@ -215,18 +199,16 @@ class ClientController extends Controller
         if(Session::has('client'))
 
          //cette requete me permet d'afficher les articles favories d'un client sur son compte 
-        $ref_client = Session('client')->ref_client;    
-        $affiche_article_wishlist = DB::table('favories')->join('articles', 'favories.ref_article', '=', 'articles.ref_article')->where('favories.ref_client','=',Session('client')->ref_client)->get();
+        $id_client = Session('client')->id;    
+        $affiche_article_wishlist = DB::table('favories')->join('articles', 'favories.article_id', '=', 'articles.id')->where('favories.client_id', $id_client)->get();
 
         return view('client.account-wishlist',[
             'affiche_article_wishlist' => $affiche_article_wishlist
         ]);
     }
 
-
     // cette requete me permet de modifier les infors(nom,prenoms,telephone) du client
-    public function ModifInfoClient(Request $request, $id)
-    {
+    public function ModifInfoClient(Request $request, $id){
         $this->validate($request, [
             'image' => 'max:2048|mimes:jpeg,png,jpg'
         ]);
@@ -245,36 +227,35 @@ class ClientController extends Controller
         $client->telephone = $request->input('telephone');
         $client->update();
     
-        return redirect('/client/signin')->with('validate', "Mise à jour effectuée avec succès, veuillez vous reconnecter !");
+        return redirect('/');
     }
     
-
     //pour la connexion au compte utilisateur orders
     public function orders(){
         
          //cette requete me permet d'afficher les commandes du client
-        $affiche_info = DB::table('info_adresses')->where('info_adresses.ref_client','=',Session('client')->ref_client)->first();
-        $affiche_commande = Commande::where('ref_info_adresse','=',$affiche_info->ref_info_adresse)->get();
+        // $affiche_info = InfoAdresse::where('info_adresses.client_id', Session('client')->id)->first();
+        $affiche_commande = Commande::where('client_id', Session('client')->id)->get();
         return view('client.account-orders',[
                 'affiche_commande' => $affiche_commande
         ]);
     }
 
     //pour la connexion au compte utilisateur wishlist
-    public function wishlist($ref_client){
+    public function wishlist($id_client){
         
-        if(Session::has('client'))
+        if(Session::has('client')){
 
-         //cette requete me permet d'afficher les articles favories d'un client sur son compte 
-        $ref_client = Session('client')->ref_client;    
-        $affiche_article_wishlist = DB::table('favories')->join('articles', 'favories.ref_article', '=', 'articles.ref_article')->where('favories.ref_client','=',Session('client')->ref_client)->get();
+            //cette requete me permet d'afficher les articles favories d'un client sur son compte 
+            // $id_client = Session('client')->id;    
+            $affiche_article_wishlist = DB::table('favories')->join('articles', 'favories.article_id', '=', 'articles.id')->where('favories.client_id', $id_client)->get();
 
-        return view('client.account-wishlist',[
-            'affiche_article_wishlist' => $affiche_article_wishlist,
-            
-        ]);
+            return view('client.account-wishlist',[
+                'affiche_article_wishlist' => $affiche_article_wishlist,
+                
+            ]);
+        }   
     }
-
 
      //pour la connexion au compte utilisateur tickets
      public function tickets(){
@@ -282,24 +263,22 @@ class ClientController extends Controller
         return view('client.account-tickets');
     }
 
-
      //pour la connexion au compte utilisateur address
      public function address(){
-        $ref_client = Session('client')->ref_client;    
-        $affiche_adresses = DB::table('info_adresses')->where('ref_client','=',$ref_client)->get();
+
+        $id_client = Session('client')->id;    
+        $affiche_adresses = InfoAdresse::where('client_id', $id_client)->get();
 
         return view('client.account-address',[
             'affiche_adresses' => $affiche_adresses
         ]);
     }
 
-
      //pour la connexion au compte utilisateur payment
      public function payment(){
         
         return view('client.account-payment');
     }
-
 
     //pour la connexion au compte utilisateur
    public function logout(){
@@ -315,7 +294,7 @@ class ClientController extends Controller
             'telephone2' => 'required|max:10',
             
         ]);
-        $info = DB::table('info_adresses')->where('ref_client','=',$request->input('ref'))->first();
+        $info = InfoAdresse::where('client_id','=',$request->input('id_client'))->first();
         if($info){ 
             
                 return view('client.checkout-shipping');
@@ -323,9 +302,9 @@ class ClientController extends Controller
 
         $val = random_int(1, 10);
 
-        $info = new Info_adresse();
+        $info = new InfoAdresse();
         $info->ref_info_adresse = 'PLUS'.$val;
-        $info->ref_client = $request->input('ref');
+        $info->client_id = $request->input('id_client');
         $info->telephone2 = $request->input('telephone2');
         $info->adresse = $request->input('adresse');
         $info->ville = $request->input('ville');
@@ -340,7 +319,6 @@ class ClientController extends Controller
     }
 
     //pour valider une commande de la part du client
-
     public function ValidateCommande(Request $request){
 
  
@@ -349,19 +327,22 @@ class ClientController extends Controller
         //     # code...
         // }
 
+        $nombreJour = floor(Session('cart')->totalPrice / Session('MethodPay')); 
+
+        $aujourdhui = Carbon::now();
+        $dateLivraison = $aujourdhui->addDays($nombreJour + 1);
+
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
 
+
         $Commande = new Commande();
         $Commande->ref_commande = 'COMD'.substr(Session('client')->nom,0,4 ).time();
-        $Commande->ref_info_adresse = $request->input('ref_info_adresse');
-        $Commande->nom_client = Session('client')->nom;
-        $Commande->prenom_client = Session('client')->prenoms;
-        $Commande->adresse = $request->input('adresse');
-        $Commande->telephone = Session('client')->telephone;
-        $Commande->ville = $request->input('ville');
-        $Commande->commune = $request->input('commune');
+        $Commande->info_adresse_id = $request->input('id_info_adresse');
+        $Commande->client_id = Session('client')->id;
         $Commande->mode_livraison = Session('method_livraison');
+        $Commande->nombreJour = $nombreJour;
+        $Commande->reste = Session('reste');
         $Commande->statut = 'etape1';
         $Commande->methode_paiement = Session('MethodPay');
         $Commande->cart = serialize($cart);
@@ -370,11 +351,35 @@ class ClientController extends Controller
 
         $Commande->save();
 
+        // Initialiser un tableau pour stocker les enregistrements
+        $Transaction = []; 
+
+        for ($i=1; $i <= $nombreJour; $i++) { 
+            # code...
+            $Transaction[] = [
+                'id' => $i,
+                'montant_a_paye' => Session('MethodPay'),
+                'date' => Carbon::now()->addDays($i)->format('Y-m-d'),
+                'statut' => 0,
+            ];
+        }
+
+        // Convertir le tableau en une chaîne JSON
+        $dataJson = json_encode($Transaction);
+
+        $transac = Transaction::create([
+            'commande_id' => $Commande->id,
+            'ref_transaction' => 'TR'.'-'.substr(Session('client')->nom,0,4 ).'-'.$Commande->id,
+            'contenue' => $dataJson ,                                     
+        ]);
+
+
         $SuivieCommande = new SuivieCommande();
         $SuivieCommande->ref_suivie_commande = 'SU'.'COMD'.substr(Session('client')->nom,0,2 ).time();
         $SuivieCommande->ref_commande = 'COMD'.substr(Session('client')->nom,0,4 ).time();
         $SuivieCommande->methode_livraison = Session('method_livraison');
-        $SuivieCommande->statut = 'etape1';
+        $SuivieCommande->statut = 'etape2';
+        $SuivieCommande->date_livraison = $dateLivraison;
 
         $SuivieCommande->save();
        
@@ -387,10 +392,11 @@ class ClientController extends Controller
     }
 
     public function order($numero){
-        $infocommande = DB::table('suivie_commandes')->where('ref_commande','=',$numero)->first();
+
+        $infocommande = SuivieCommande::where('ref_commande',$numero)->first();
         if($infocommande){
 
-            $detailcommande = DB::table('suivie_commandes')->where('ref_commande','=',$infocommande->ref_commande)->first();
+            $detailcommande = SuivieCommande::where('ref_commande',$infocommande->ref_commande)->first();
             return view('client.order-tracking',['detailcommande' => $detailcommande]);
         }
 
@@ -398,9 +404,10 @@ class ClientController extends Controller
 
     public function ordercommande(Request $request){
             
-        $infocommande = DB::table('suivie_commandes')->where('ref_commande','=',$request->input('NumeroCommande'))->first();
+        $infocommande = SuivieCommande::where('ref_commande',$request->input('NumeroCommande'))->first();
+        
         if($infocommande){
-            $detailcommande = DB::table('suivie_commandes')->where('ref_commande','=',$request->input('NumeroCommande'))->first();
+            $detailcommande = SuivieCommande::where('ref_commande',$request->input('NumeroCommande'))->first();
              return view('client.order-tracking',['detailcommande' => $detailcommande]);
         }
     }

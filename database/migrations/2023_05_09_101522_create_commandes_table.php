@@ -16,18 +16,18 @@ return new class extends Migration
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
             $table->string('ref_commande');
-            $table->string('ref_info_adresse');
-            $table->string('nom_client');
-            $table->string('prenom_client');
-            $table->mediumText('adresse');
-            $table->string('telephone');
-            $table->string('ville');
-            $table->string('commune');
+            $table->foreignId('info_adresse_id');
+            $table->foreignId('client_id');
             $table->string('mode_livraison');
+            $table->string('nombreJour');
+            $table->string('reste');
             $table->string('methode_paiement');
             $table->string('statut')->default('etape1');
             $table->longtext('cart');
             $table->timestamps();
+
+            $table->foreign('info_adresse_id')->references('id')->on('info_adresses');
+            $table->foreign('client_id')->references('id')->on('clients');
         });
     }
 

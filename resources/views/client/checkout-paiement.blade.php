@@ -63,81 +63,129 @@
             </ul>
             
             <h3 class="font-weight-normal text-center my-4">{{number_format(Session::get('cart')->totalPrice + Session::get('valeur_livraison') - Session::get('ValeurPromo'),0,",",".")}}<small> Fcfa</small></h3>
-            {{-- @if (Session::has('CodePromo'))
-            
-            @else
-                @if (Session::has('codevalid'))
-                    <div class="alert alert-success text-center">
-                      {{Session::get('codevalid')}}
-                    </div>
-                @endif
-                @if (Session::has('codenonvalid'))
-                    <div class="alert alert-danger text-center">
-                      {{Session::get('codenonvalid')}}
-                    </div>
-                @endif
-                <form class="card-body needs-validation" action="{{url('/CodePromo')}}" method="post" novalidate>
-                  @csrf
-                  <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Promo code" name="CodePromo" required>
-                    <div class="invalid-feedback">Veuillez fournir le code promotionnel.</div>
-                  </div>
-                  <button class="btn btn-outline-primary btn-block" type="submit">Valider</button>
-                </form>
-            @endif --}}
           </div>
         </aside>
-        <section class="col-lg-8">
+
+        {{-- <section class="col-lg-8"><br>
           <!-- Payment methods accordion-->
           <h2 class="h6 pb-3 mb-2">Choisissez le mode de paiement</h2>
           <div class="accordion mb-2" id="payment-method" role="tablist">
           <form class="needs-validation" action="{{url('/client/MethodPay')}}" method="POST">
             @csrf
-                <div class="card">
+                <div class="card mb-2">
                   <div class="card-header" role="tab">
-                    <h3 class="accordion-heading"><a class="collapsed" href="#points" data-toggle="collapse"><i class="czi-gift mr-2"></i>Payé cash à la livraison<span class="accordion-indicator"></span></a></h3>
+                    <h3 class="accordion-heading"><a class="collapsed" href="#points" data-toggle="collapse"><i class="czi-gift mr-2"></i>Payé <span class="text-primary">1.000 Fr</span> chaque jours<span class="accordion-indicator"></span></a></h3>
                   </div>
-                  <div class="collapse" id="points" data-parent="#payment-method" role="tabpanel">
+                  <div class="collapse" id="points" role="tabpanel">
                     <div class="card-body">
-                      <div class="custom-control custom-radio mb-4">
-                        <input class="custom-control-input" type="radio" id="courier" name="Paiement" value="Cash" checked>
-                        <label class="custom-control-label" for="courier">régler votre commande dés reception.</label>
+                      <div class="custom-control custom-radio mb-2">
+                        <input class="custom-control-input" type="checkbox" id="courier" name="Paiement" value="1000" >
+                        <label class="custom-control-label" for="courier">Sur : {{number_format(Session::get('cart')->totalPrice / 1000) }} jours    reste : {{number_format(Session::get('cart')->totalPrice - ((Session::get('cart')->totalPrice / 1000) * 1000) ) }} Fcfa  Frais livraison :  {{number_format( Session::get('valeur_livraison')) }} Fcfa</label>
                       </div>
                     </div>
                   </div>
                 </div>
-                <!-- <div class="card">
+
+                <div class="card mb-2">
                   <div class="card-header" role="tab">
-                    <h3 class="accordion-heading"><a class="collapsed" href="#paypal" data-toggle="collapse"><i class="czi-paypal mr-2 align-middle"></i>Payer avec PayPal<span class="accordion-indicator"></span></a></h3>
+                    <h3 class="accordion-heading"><a class="collapsed" href="#points1" data-toggle="collapse"><i class="czi-gift mr-2"></i>Payé <span class="text-primary">2.000 Fr</span> chaque jours<span class="accordion-indicator"></span></a></h3>
                   </div>
-                  <div class="collapse" id="paypal" data-parent="#payment-method" role="tabpanel">
-                    <div class="card-body font-size-sm">
-                      <div class="custom-control custom-checkbox d-block">
-                        <input class="custom-control-input" type="checkbox" id="use_points" name="Paiement" value="PayPal">
-                        <label class="custom-control-label" for="use_points">régler votre commande a partir d'un compte PayPal.</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>  -->
-                <!-- <div class="card">
-                  <div class="card-header" role="tab">
-                    <h3 class="accordion-heading"><a href="#card" data-toggle="collapse"><i class="czi-card font-size-lg mr-2 mt-n1 align-middle"></i>Payez a partir d'un compte mobile money<span class="accordion-indicator"></span></a></h3>
-                  </div>
-                  <div class="collapse show" id="card" data-parent="#payment-method" role="tabpanel">
+                  <div class="collapse" id="points1" role="tabpanel">
                     <div class="card-body">
-                      <img height="50" width="500" src="https://docs.cinetpay.com/images/latest_ci1.webp" alt="Logo CinetPay">
-                      <div class="card-wrapper"></div>
-                      <div class="custom-control custom-radio mb-4">
-                        <input class="custom-control-input" type="radio" id="local" name="Paiement" value="Mobile Money">
-                        <a class="btn btn-danger" href="{{url('/client/cinetpay')}}">Passer au paiement</a>
-              
+                      <div class="custom-control custom-radio mb-2">
+                        <input class="custom-control-input" type="checkbox" id="courier1" name="Paiement" value="2000" >
+                        <label class="custom-control-label" for="courier">Sur : {{number_format(Session::get('cart')->totalPrice / 2000) }} jours &nbsp;   reste : {{number_format(Session::get('cart')->totalPrice - ((Session::get('cart')->totalPrice / 2000) * 2000) ) }} Fcfa  Frais livraison :  {{number_format( Session::get('valeur_livraison')) }} Fcfa</label>
                       </div>
                     </div>
                   </div>
-                </div> -->
+                </div>
+
+                <div class="card mb-2">
+                  <div class="card-header" role="tab">
+                    <h3 class="accordion-heading"><a class="collapsed" href="#points2" data-toggle="collapse"><i class="czi-gift mr-2"></i>Payé <span class="text-primary">5.000 Fr</span> chaque jours<span class="accordion-indicator"></span></a></h3>
+                  </div>
+                  <div class="collapse" id="points2" role="tabpanel">
+                    <div class="card-body">
+                      <div class="custom-control custom-radio mb-2">
+                        <input class="custom-control-input" type="checkbox" id="courier2" name="Paiement" value="5000" >
+                        <label class="custom-control-label" for="courier">Sur : {{number_format(Session::get('cart')->totalPrice / 5000) }} jours    reste : {{number_format((Session::get('cart')->totalPrice - ((Session::get('cart')->totalPrice / 5000) * 5000)) ) }} Fcfa  Frais livraison :  {{number_format( Session::get('valeur_livraison')) }} Fcfa</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               
               </div>
               <!-- Navigation (desktop)-->
+              <div class="d-none d-lg-flex pt-4">
+                <div class="w-50 pr-3"><a class="btn btn-secondary btn-block" href="{{url('/client/shipping')}}"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">Retour à Expédition</span><span class="d-inline d-sm-none">Retour</span></a></div>
+                <div class="w-50 pl-2"><button class="btn btn-primary btn-block" type="submit"><span class="d-none d-sm-inline">Vérifiez votre commande</span><span class="d-inline d-sm-none">Vérifier la commande</span><i class="czi-arrow-right mt-sm-0 ml-1"></i></button></div>
+              </div>
+              <!-- Navigation (mobile)-->
+              <div class="row d-lg-none">
+                <div class="col-lg-8">
+                  <div class="d-flex pt-4 mt-3">
+                    <div class="w-50 pr-3"><a class="btn btn-secondary btn-block" href="{{url('/client/shipping')}}"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">Retour à Expédition</span><span class="d-inline d-sm-none">Retour</span></a></div>
+                    <div class="w-50 pl-2"><button class="btn btn-primary btn-block" type="submit"><span class="d-none d-sm-inline">Vérifiez votre commande</span><span class="d-inline d-sm-none">Vérifier la commande</span><i class="czi-arrow-right mt-sm-0 ml-1"></i></button></div>
+                  </div>
+                </div>
+              </div>
+            </form>
+        </section> --}}
+
+        <section class="col-lg-8">
+          <!-- Shipping methods table-->
+          <h2 class="h6 pb-3 mb-2">Choisissez le mode de paiement</h2>
+          <form class="needs-validation" action="{{url('/client/MethodPay')}}" method="post">
+            @csrf
+              <div class="table-responsive">
+                  <table class="table table-hover font-size-sm border-bottom">
+                    <thead>
+                      <tr>
+                        <th class="align-middle"></th>
+                        <th class="align-middle">Montant à payé</th>
+                        <th class="align-middle">Nombre de jours</th>
+                        <th class="align-middle"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                          <tr>
+                            <td>
+                              <div class="custom-control custom-radio mb-4">
+                                <input class="custom-control-input" type="radio" id="courier" name="Paiement" value="1000" checked>
+                                <label class="custom-control-label" for="courier"></label>
+                              </div>
+                            </td>
+                            <td class="align-middle"><span class="text-primary font-weight h5">1.000 Fcfa</span><br><span class="text-muted">All addresses (default zone), United States &amp; Canada</span></td>
+                            <td class="align-middle">{{number_format(floor(Session::get('cart')->totalPrice / 1000)) }} jours</td>
+                            <td class="align-middle">+ {{ Session::get('cart')->totalPrice % 1000 }} Fcfa</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="custom-control custom-radio mb-4">
+                                <input class="custom-control-input" type="radio" id="local" name="Paiement" value="2000">
+                                <label class="custom-control-label" for="local"></label>
+                              </div>
+                            </td>
+                            <td class="align-middle"><span class="text-primary font-weight h5">2.000 Fcfa</span><br><span class="text-muted">All addresses (default zone), United States &amp; Canada</span></td>
+                            <td class="align-middle">{{number_format(floor(Session::get('cart')->totalPrice / 2000)) }} jours</td>
+                            <td class="align-middle">+ {{ Session::get('cart')->totalPrice % 2000 }} Fcfa</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="custom-control custom-radio mb-4">
+                                <input class="custom-control-input" type="radio" id="local2" name="Paiement" value="5000">
+                                <label class="custom-control-label" for="local2"></label>
+                              </div>
+                            </td>
+                            <td class="align-middle"><span class="text-primary font-weight h5">5.000 Fcfa</span><br><span class="text-muted">All addresses (default zone), United States &amp; Canada</span></td>
+                            <td class="align-middle">{{number_format(floor(Session::get('cart')->totalPrice / 5000)) }} jours</td>
+                            <td class="align-middle">+ {{ Session::get('cart')->totalPrice % 5000 }} Fcfa</td>
+                          </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+                <!-- Navigation (desktop)-->
               <div class="d-none d-lg-flex pt-4">
                 <div class="w-50 pr-3"><a class="btn btn-secondary btn-block" href="{{url('/client/shipping')}}"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">Retour à Expédition</span><span class="d-inline d-sm-none">Retour</span></a></div>
                 <div class="w-50 pl-2"><button class="btn btn-primary btn-block" type="submit"><span class="d-none d-sm-inline">Vérifiez votre commande</span><span class="d-inline d-sm-none">Vérifier la commande</span><i class="czi-arrow-right mt-sm-0 ml-1"></i></button></div>

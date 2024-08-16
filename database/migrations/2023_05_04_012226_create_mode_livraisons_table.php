@@ -20,6 +20,13 @@ return new class extends Migration
             $table->string('valeur_mode_livraison')->default('1500');
             $table->timestamps();
         });
+
+        
+        // Insérer des valeurs dès la création de la table
+        DB::table('mode_livraisons')->insert([
+            ['ref_mode_livraison' => 'LIVRAIS01', 'libelle_mode_livraison' => 'magasin', 'valeur_mode_livraison' => '0','created_at' => now(), 'updated_at' => now()],
+            ['ref_mode_livraison' => 'LIVRAIS02','libelle_mode_livraison' => 'domicile', 'valeur_mode_livraison' => '1500', 'created_at' => now(), 'updated_at' => now()],
+        ]);
     }
 
     /**

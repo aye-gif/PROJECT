@@ -79,7 +79,7 @@
                 {{Session::get('status')}}
               </div>
            @endif
-          <form action="{{url('createaccount')}}" method="POST">
+          <form action="{{url('/createaccount')}}" method="POST">
             @csrf
             <div class="row">
               <div class="col-sm-6">

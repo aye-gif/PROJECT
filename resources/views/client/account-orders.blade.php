@@ -41,7 +41,7 @@
             </div>
             <ul class="list-unstyled mb-0">
               <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 active" href="{{url('/client/orders')}}"><i class="czi-bag opacity-60 mr-2"></i>Commandes<span class="font-size-sm text-muted ml-auto"></span></a></li>
-              <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{url('/client/wishlist',[Session('client')->ref_client])}}"><i class="czi-heart opacity-60 mr-2"></i>Favories<span class="font-size-sm text-muted ml-auto"></span></a></li>
+              <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{url('/client/wishlist',[Session('client')->id])}}"><i class="czi-heart opacity-60 mr-2"></i>Favories<span class="font-size-sm text-muted ml-auto"></span></a></li>
               <!-- <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{url('/client/tickets')}}"><i class="czi-help opacity-60 mr-2"></i>Billets d'assistance<span class="font-size-sm text-muted ml-auto"></span></a></li> -->
             </ul>
             <div class="bg-secondary px-4 py-3">
@@ -88,7 +88,7 @@
                     <td class="py-3"><a class="nav-link-style font-weight-medium font-size-sm" href="#order-details" data-toggle="modal">{{$resultat->ref_commande}}</a></td>
                     <td class="py-3">{{$resultat->created_at}}</td>
                     <td class="py-3">{{$resultat->mode_livraison}}</td>
-                    <td class="py-3">{{$resultat->methode_paiement}}</td>
+                    <td class="py-3">{{$resultat->methode_paiement}} / jours</td>
                     <td class="py-3"><span class="badge badge-info m-0">{{$resultat->statut}}</span></td>
                   </tr>
                 @endforeach

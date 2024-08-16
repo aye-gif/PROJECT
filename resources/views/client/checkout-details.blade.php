@@ -91,13 +91,13 @@
           </div>
           
               <!-- Shipping address-->
-              <form class="needs-validation" action="{{url('PlusInfo')}}" method="post">
+              <form class="needs-validation" action="{{url('/PlusInfo')}}" method="post">
                 @csrf
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label for="checkout-address-1">Pénoms</label>
-                        <input class="form-control" type="hidden" id="checkout-address-1" value="{{Session('client')->ref_client}}" name="ref">
+                        <input class="form-control" type="hidden" id="checkout-address-1" value="{{Session('client')->id}}" name="id_client">
                         <input class="form-control" type="text" id="checkout-address-1" value="{{Session('client')->prenoms}}" disabled>
                       </div>
                     </div>
@@ -117,8 +117,8 @@
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <label for="checkout-address-2">Télephone mobile supplémentaire</label>
-                        <input class="form-control" type="number" id="eckout-address-2" name="telephone2" required maxlength="10">
+                        <label for="checkout-address-2">Télephone mobile supplémentaire  </label> <span class="text-danger">*</span>
+                        <input class="form-control" type="text" id="eckout-address-2" name="telephone2" required maxlength="10">
                       </div>
                     </div>
                   </div>

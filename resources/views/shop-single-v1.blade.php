@@ -86,7 +86,7 @@
                     @endforeach
 
                     <div class="product-badge product-available mt-n1"><i class="czi-security-check"></i>{{ $affiche_info_article->disponibilite }}</div>
-                  </div>
+                  </div><br>
 
                     <div class="form-group">
                       <div class="d-flex justify-content-between align-items-center pb-1">
@@ -115,9 +115,9 @@
                       <div class="card-body">
                         <h6 class="font-size-sm mb-2">Composition</h6>
                         <ul class="font-size-sm pl-4">
-                          <li>{{$affiche_detail_article->libelle1}}: {{$affiche_detail_article->valeur1}}</li>
-                          <li>{{$affiche_detail_article->libelle2}}: {{$affiche_detail_article->valeur2}}</li>
-                          <li>{{$affiche_detail_article->libelle3}} {{$affiche_detail_article->valeur3}}</li>
+                          <li>{{$affiche_detail_article->libelle1}} : {{$affiche_detail_article->valeur1}}</li>
+                          <li>{{$affiche_detail_article->libelle2}} : {{$affiche_detail_article->valeur2}}</li>
+                          <li>{{$affiche_detail_article->libelle3}} : {{$affiche_detail_article->valeur3}}</li>
                         </ul>
                         <h6 class="font-size-sm mb-2">Art. No.</h6>
                         <ul class="font-size-sm pl-4 mb-0">
@@ -163,24 +163,9 @@
       <div class="row align-items-center py-md-3" id="monDiv">
         <div class="col-lg-5 col-md-6 offset-lg-1 order-md-2"><img class="d-block rounded-lg" src="{{ asset('img/shop/catalog/'.$affiche_info_article->image_article) }}" alt="Image"></div>
         <div class="col-lg-4 col-md-6 offset-lg-1 py-4 order-md-1">
-          <h2 class="h3 mb-4 pb-2">Matériaux de haute qualité</h2>
-          <h6 class="font-size-base mb-3">{{$affiche_info_article->libelle5}}</h6>
-          <p class="font-size-sm text-muted pb-2">{{$affiche_info_article->libelle4}} {{$affiche_info_article->valeur4}}</p>
-          <h6 class="font-size-base mb-3">Instructions</h6>
-          <ul class="nav nav-tabs mb-3" role="tablist">
-            <li class="nav-item"><a class="nav-link active" href="#wash" data-toggle="tab" role="tab"><i class="czi-wash font-size-xl"></i></a></li>
-            <li class="nav-item"><a class="nav-link" href="#bleach" data-toggle="tab" role="tab"><i class="czi-bleach font-size-xl"></i></a></li>
-            <li class="nav-item"><a class="nav-link" href="#hand-wash" data-toggle="tab" role="tab"><i class="czi-hand-wash font-size-xl"></i></a></li>
-            <li class="nav-item"><a class="nav-link" href="#ironing" data-toggle="tab" role="tab"><i class="czi-ironing font-size-xl"></i></a></li>
-            <li class="nav-item"><a class="nav-link" href="#dry-clean" data-toggle="tab" role="tab"><i class="czi-dry-clean font-size-xl"></i></a></li>
-          </ul>
-          <div class="tab-content text-muted font-size-sm">
-            <div class="tab-pane fade show active" id="wash" role="tabpanel">Lavage en machine doux à 30°</div>
-            <div class="tab-pane fade" id="bleach" role="tabpanel">Ne pas utiliser d'eau de Javel</div>
-            <div class="tab-pane fade" id="hand-wash" role="tabpanel">Lavage à la main normal (30°)</div>
-            <div class="tab-pane fade" id="ironing" role="tabpanel">Repassage à basse température</div>
-            <div class="tab-pane fade" id="dry-clean" role="tabpanel">Ne pas nettoyer à sec</div>
-          </div>
+          <h2 class="h3 mb-4 pb-2">{{$affiche_info_article->libelle_article}}</h2>
+          <h6 class="font-size-base mb-3">{{$affiche_detail_article->libelle5}}</h6>
+          <p class="font-size-sm text-muted pb-2">{{$affiche_detail_article->libelle4}} {{$affiche_detail_article->valeur4}}</p>
         </div>
       </div>
 
@@ -192,7 +177,7 @@
           <div class="col-lg-4 col-md-5">
             <h2 class="h3 mb-4">{{count($affiche_commentaire_article)}} Commentaires</h2>
             <div class="star-rating mr-2"><i class="czi-star-filled font-size-sm text-accent mr-1"></i><i class="czi-star-filled font-size-sm text-accent mr-1"></i><i class="czi-star-filled font-size-sm text-accent mr-1"></i><i class="czi-star-filled font-size-sm text-accent mr-1"></i><i class="czi-star font-size-sm text-muted mr-1"></i></div><span class="d-inline-block align-middle">4.1 Note globale</span>
-            <p class="pt-3 font-size-sm text-muted">{{count($affiche_commentaire_article)}} sur {{count($compte_total_commentaire)}} ({{count($compte_total_commentaire) +count($affiche_commentaire_article)}}%)<br>Les clients ont recommandé ce produit</p>
+            <p class="pt-3 font-size-sm text-muted">{{count($affiche_commentaire_article)}} sur {{$compte_total_commentaire}} ({{$compte_total_commentaire +count($affiche_commentaire_article)}}%)<br>Les clients ont recommandé ce produit</p>
           </div>
 
           <div class="col-lg-8 col-md-7">
@@ -295,7 +280,7 @@
                             @method('PUT')
                             @csrf
 
-                            <input class="form-control" name="ref_article" type="hidden" value="{{$affiche_info_article->ref_article}}">
+                            <input class="form-control" name="article" type="hidden" value="{{$affiche_info_article->id}}">
 
                             <div class="form-group">
                               <label for="review-rating">Étoiles<span class="text-danger">*</span></label>

@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SuivieCommande extends Model
+class Transaction extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'ref_suivie_commande',
-        'ref_commande',
-        'methode_livraison',
-        'statut',
-        'date_livraison',
+        'commande_id',
+        'ref_transaction',
+        'contenue',
+        
     ];
 }

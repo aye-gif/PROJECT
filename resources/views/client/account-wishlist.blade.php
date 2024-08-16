@@ -41,7 +41,7 @@
             </div>
             <ul class="list-unstyled mb-0">
               <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{url('/client/orders')}}"><i class="czi-bag opacity-60 mr-2"></i>Commandes<span class="font-size-sm text-muted ml-auto"></span></a></li>
-              <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 active" href="{{url('/client/wishlist')}}"><i class="czi-heart opacity-60 mr-2"></i>Favories<span class="font-size-sm text-muted ml-auto"></span></a></li>
+              <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 active" href="{{url('/client/wishlist',[Session('client')->id])}}"><i class="czi-heart opacity-60 mr-2"></i>Favories<span class="font-size-sm text-muted ml-auto"></span></a></li>
               <!-- <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{url('/client/tickets')}}"><i class="czi-help opacity-60 mr-2"></i>Billets d'assistance<span class="font-size-sm text-muted ml-auto"></span></a></li> -->
             </ul>
             <div class="bg-secondary px-4 py-3">
@@ -50,7 +50,6 @@
             <ul class="list-unstyled mb-0">
               <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{url('/client/account',[Session('client')->ref_client])}}"><i class="czi-user opacity-60 mr-2"></i>Informations sur le profil</a></li>
               <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{url('/client/address')}}"><i class="czi-location opacity-60 mr-2"></i>Adresses</a></li>
-              <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{url('/client/payment')}}"><i class="czi-card opacity-60 mr-2"></i>Méthodes de payement</a></li>
               <li class="d-lg-none border-top mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{url('/client/signin')}}"><i class="czi-sign-out opacity-60 mr-2"></i>se déconnecter</a></li>
             </ul>
           </div>
@@ -65,16 +64,16 @@
           @foreach ($affiche_article_wishlist as $resultat)
               <!-- Item-->
               <div class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom">
-                <div class="media media-ie-fix d-block d-sm-flex text-center text-sm-left"><a class="d-inline-block mx-auto mr-sm-4" href="shop-single-v1.html" style="width: 10rem;"><img src="{{ asset('img/shop/catalog/'.$resultat->image_article) }}" alt="Product"></a>
+                <div class="media media-ie-fix d-block d-sm-flex text-center text-sm-left"><a class="d-inline-block mx-auto mr-sm-4" href="#" style="width: 10rem;"><img src="{{ asset('img/shop/catalog/'.$resultat->image_article) }}" alt="Product"></a>
                   <div class="media-body pt-2">
-                    <h3 class="product-title font-size-base mb-2"><a href="shop-single-v1.html">{{$resultat->libelle_article}}</a></h3>
+                    <h3 class="product-title font-size-base mb-2"><a href="#">{{$resultat->libelle_article}}</a></h3>
                     <div class="font-size-sm"><span class="text-muted mr-2">Type :</span>{{$resultat->type_article}}</div>
                     <div class="font-size-sm"><span class="text-muted mr-2">Statut :</span>{{$resultat->statut}}</div>
                     <div class="font-size-lg text-accent pt-2">{{number_format($resultat->prix,0,",",".") }}<small> Fcfa</small></div>
                   </div>
                 </div>
                 <div class="pt-2 pl-sm-3 mx-auto mx-sm-0 text-center">
-                  <a href="{{url('/client/wishlist/Remove',$resultat->ref_article)}}" class="btn btn-outline-danger btn-sm" type="button"><i class="czi-trash mr-2"></i>Supprimer</a>
+                  <a href="{{url('/client/wishlist/Remove',$resultat->article_id)}}" class="btn btn-outline-danger btn-sm" type="button"><i class="czi-trash mr-2"></i>Supprimer</a>
                 </div>
               </div>
           @endforeach

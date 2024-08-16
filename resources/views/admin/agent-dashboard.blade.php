@@ -10,7 +10,7 @@ Content START -->
 		<!-- Title START -->
 		<div class="row">
 			<div class="col-12">
-				<h1 class="fs-4 mb-0"><i class="bi bi-house-door fa-fw me-1"></i>Dashboard</h1>
+				<h1 class="fs-4 mb-0"><i class="bi bi-house-door fa-fw me-1"></i>Tableau de bord</h1>
 			</div>
 		</div>	
 		<!-- Title END -->
@@ -23,7 +23,7 @@ Content START -->
 					<div class="d-flex align-items-center">
 						<!-- Icon -->
 						<div class="icon-xl bg-success rounded-3 text-white">
-							<i class="bi bi-journals"></i>
+							<i class="bi bi-cart"></i>
 						</div>
 						<!-- Content -->
 						<div class="ms-3">
@@ -40,7 +40,7 @@ Content START -->
 					<div class="d-flex align-items-center">
 						<!-- Icon -->
 						<div class="icon-xl bg-info rounded-3 text-white">
-							<i class="bi bi-graph-up-arrow"></i>
+							<i class="bi bi-truck"></i>
 						</div>
 						<!-- Content -->
 						<div class="ms-3">
@@ -57,7 +57,7 @@ Content START -->
 					<div class="d-flex align-items-center">
 						<!-- Icon -->
 						<div class="icon-xl bg-warning rounded-3 text-white">
-							<i class="bi bi-bar-chart-line-fill"></i>
+							<i class="bi bi-people"></i>
 						</div>
 						<!-- Content -->
 						<div class="ms-3">
@@ -95,106 +95,77 @@ Content START -->
 					<!-- Card header START -->
 					<div class="card-header border-bottom">
 						<div class="d-sm-flex justify-content-between align-items-center">
-							<h5 class="mb-2 mb-sm-0">Liste des commandes</h5>	
+							<h5 class="mb-2 mb-sm-0">Liste des transactions journaliers</h5>	
 						</div>
 					</div>
 					<!-- Card header END -->
 
 					<!-- Card body START -->
 					<div class="card-body">
-						<!-- Search and select START -->
-						<div class="row g-3 align-items-center justify-content-between mb-3">
-							<!-- Search -->
-							<div class="col-md-8">
-								<form class="rounded position-relative">
-									<input class="form-control pe-5" type="search" placeholder="Search" aria-label="Search">
-									<button class="btn border-0 px-3 py-0 position-absolute top-50 end-0 translate-middle-y" type="submit"><i class="fas fa-search fs-6"></i></button>
-								</form>
-							</div>
-
-							<!-- Select option -->
-							<div class="col-md-3">
-								<!-- Short by filter -->
-								<form>
-									<select class="form-select js-choice" aria-label=".form-select-sm">
-										<option value="">Sort by</option>
-										<option>Free</option>
-										<option>Newest</option>
-										<option>Oldest</option>
-									</select>
-								</form>
-							</div>
-						</div>
-						<!-- Search and select END -->
-
+						
 						<!-- Hotel room list START -->
 						<div class="table-responsive border-0">
 							<table class="table align-middle p-4 mb-0 table-hover table-shrink">
 								<!-- Table head -->
-								<thead class="table-light">
+								<!-- Table body START -->
+								<thead class="table-dark mb-2">
 									<tr>
 										<th scope="col" class="border-0 rounded-start">#</th>
-										<th scope="col" class="border-0">Nom client</th>
-										<th scope="col" class="border-0">Télephone</th>
-										<th scope="col" class="border-0">Date</th>
-										<th scope="col" class="border-0">livraison</th>
-										<th scope="col" class="border-0">Paiement</th>
+										<th scope="col" class="border-0 text-center">Montant à payer</th>
+										<th scope="col" class="border-0 text-center">Date</th>
+										<th scope="col" class="border-0 text-center">Statut</th>
 										<th scope="col" class="border-0 rounded-end text-center">Action</th>
 									</tr>
 								</thead>
-
-								<!-- Table body START -->
-								<tbody class="border-top-0">
-									<!-- Table item -->
-									@foreach ($affiche_comandes as $resultat)
+									@foreach ($affiche_transactions as $resultat)
+										<!-- Décodage du JSON en tableau PHP -->
+										<!-- Table data -->
+										<!-- Table data -->
+										
+										@php
+											$records = json_decode($resultat->contenue, true);
+										@endphp
 										<tr>
-											<td> <h6 class="mb-0">{{$resultat->id}}</h6> </td>
-											<td> <h6 class="mb-0"><a href="{{url('admin/VoirClient',[$resultat->ref_info_adresse])}}">{{$resultat->nom_client}} {{$resultat->prenom_client}}</a></h6> </td>
-											<td> {{$resultat->telephone}}</td>
-											<td>{{$resultat->created_at}}</td>
-											<td> <div class="badge text-bg-success">{{$resultat->mode_livraison}}</div> </td>
-											<td> <div class="badge bg-success bg-opacity-10 text-success">{{$resultat->methode_paiement}}</div> </td>
-											<td class="text-center"> 
-												<a href="{{url('admin/',[$resultat->id])}}" class="btn btn-sm btn-light mb-0">Voir</a>
-												<a href="{{url('admin/VoirCommande/',[$resultat->id])}}" class="btn btn-sm btn-light mb-0">Facture</a>   
+											<td colspan="5" class="p-0">
+												<div class="row row-cols-xl-7 align-items-lg-center border-bottom g-4">
+													<div class="bg-light px-2 py-4 text-center">
+														<h6 class="mb-0">Client : {{ $resultat->nom }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																	     Télephone : {{ $resultat->telephone }}</h6>
+													</div>
+												</div>
 											</td>
 										</tr>
+										<!-- Vérification si le JSON a été correctement décodé et contient des données -->
+										@if($records && is_array($records))
+											<tbody class="border-top-0">
+												@foreach ($records as $resultat2)
+													@if($resultat2['date'] === $affiche_date)
+														<tr>
+															<td><h6 class="mb-0 text-center">{{ $resultat2['id'] }}</h6></td>
+															<td><h6 class="mb-0 text-center"><a href="">{{ $resultat2['montant_a_paye'] }}</a></h6></td>
+															<td class="text-center">{{ \Carbon\Carbon::parse($resultat2['date'])->format('d-m-Y') }}</td>
+															<td class="text-center"><div class="badge text-center text-bg-{{ $resultat2['statut'] == 0 ? 'warning' : 'success'}}"> {{ $resultat2['statut'] == 0 ? 'Non payé' : 'Payé' }}</div></td>
+															<td class="text-center">
+																<a href="{{url('/admin/infoTransaction',$resultat->commande_id)}}" class="btn btn-sm btn-light mb-0">Valider</a>
+															</td>
+														</tr>
+													@endif
+												@endforeach
+											</tbody>
+										@endif
 									@endforeach
-
-								</tbody>
+								
 								<!-- Table body END -->
 							</table>
 						</div>
+						
 						<!-- Hotel room list END -->
 					</div>
 					<!-- Card body END -->
 
-					<!-- Card footer START -->
-					<div class="card-footer pt-0">
-						<!-- Pagination and content -->
-						<div class="d-sm-flex justify-content-sm-between align-items-sm-center">
-							<!-- Content -->
-							<p class="mb-sm-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
-							<!-- Pagination -->
-							<nav class="mb-sm-0 d-flex justify-content-center" aria-label="navigation">
-								<ul class="pagination pagination-sm pagination-primary-soft mb-0">
-									<li class="page-item disabled">
-										<a class="page-link" href="#" tabindex="-1">Prev</a>
-									</li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item active"><a class="page-link" href="#">2</a></li>
-									<li class="page-item disabled"><a class="page-link" href="#">..</a></li>
-									<li class="page-item"><a class="page-link" href="#">15</a></li>
-									<li class="page-item">
-										<a class="page-link" href="#">Next</a>
-									</li>
-								</ul>
-							</nav>
-						</div>
-					</div>
-					<!-- Card footer END -->
 				</div>
 			</div>
+
 		</div>	
 		<!-- Booking table END -->
 	</div>

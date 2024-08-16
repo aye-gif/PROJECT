@@ -22,6 +22,11 @@ return new class extends Migration
             $table->string('password');
             $table->timestamps();
         });
+
+        // Insérer des valeurs dès la création de la table
+        DB::table('admins')->insert([
+            ['image' => 'LOGO.png', 'nom' => 'Arnold', 'prenoms' => 'Aye aurelien', 'email' => 'ayearnoldaurelienokaingne@gmail.com', 'password' => bcrypt('Prisca@123'),'created_at' => now(), 'updated_at' => now()],
+        ]);
     }
 
     /**

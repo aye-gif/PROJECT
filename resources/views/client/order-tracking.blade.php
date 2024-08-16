@@ -20,7 +20,7 @@
           </nav>
         </div>
         <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
-          <h1 class="h3 text-light mb-0">Suivi de commande : <span class="h4 font-weight-normal text-light">{{$detailcommande->ref_commande}}</span></h1>
+          <h1 class="h3 text-light mb-0">Suivi de commande : <span class="h4 font-weight-normal text-light">{{ $detailcommande->ref_commande }}</span></h1>
         </div>
       </div>
     </div>
@@ -34,10 +34,10 @@
               <div class="bg-secondary p-4 text-center rounded-lg"><span class="font-weight-medium text-dark mr-2">Mode Livraison :</span>{{$detailcommande->methode_livraison}}</div>
             </div>
             <div class="col-sm-4 mb-2">
-              <div class="bg-secondary p-4 text-center rounded-lg"><span class="font-weight-medium text-dark mr-2">Statut :</span>Commande en traitement</div>
+              <div class="bg-secondary p-4 text-center rounded-lg"><span class="font-weight-medium text-dark mr-2">Statut :</span>Commande en attente de paiement</div>
             </div>
             <div class="col-sm-4 mb-2">
-              <div class="bg-secondary p-4 text-center rounded-lg"><span class="font-weight-medium text-dark mr-2">Date de livraison :</span>{{$detailcommande->created_at}}</div>
+              <div class="bg-secondary p-4 text-center rounded-lg"><span class="font-weight-medium text-dark mr-2">Date de livraison :</span>{{$detailcommande->date_livraison}}</div>
             </div>
           </div>
           <!-- Progress-->
@@ -61,7 +61,7 @@
                       <div class="media-tab-media mr-3"><i class="czi-settings"></i></div>
                       <div class="media-body">
                         <div class="media-tab-subtitle text-muted font-size-xs mb-1">Deuxième étape</div>
-                        <h6 class="media-tab-title text-nowrap mb-0">Commande en traitement</h6>
+                        <h6 class="media-tab-title text-nowrap mb-0">Commande en attente de paiement</h6>
                       </div>
                     </div>
                   </div>
@@ -126,7 +126,7 @@
                       <div class="media-tab-media mr-3"><i class="czi-settings"></i></div>
                       <div class="media-body">
                         <div class="media-tab-subtitle text-muted font-size-xs mb-1">Deuxième étape</div>
-                        <h6 class="media-tab-title text-nowrap mb-0">Commande en traitement</h6>
+                        <h6 class="media-tab-title text-nowrap mb-0">Commande en attente de paiement</h6>
                       </div>
                     </div>
                   </div>
@@ -191,7 +191,7 @@
                       <div class="media-tab-media mr-3"><i class="czi-settings"></i></div>
                       <div class="media-body">
                         <div class="media-tab-subtitle text-muted font-size-xs mb-1">Deuxième étape</div>
-                        <h6 class="media-tab-title text-nowrap mb-0">Commande en traitement</h6>
+                        <h6 class="media-tab-title text-nowrap mb-0">Commande en attente de paiement</h6>
                       </div>
                     </div>
                   </div>
@@ -226,9 +226,13 @@
       <!-- Footer-->
       <div class="d-sm-flex flex-wrap justify-content-between align-items-center text-center pt-4">
         <div class="custom-control custom-checkbox mt-2 mr-3">
-          <input class="custom-control-input" type="checkbox" id="notify-me" checked>
-          <label class="custom-control-label" for="notify-me">Prévenez-moi lorsque la commande est livrée</label>
+          <h2 class="h6 pb-3 mb-2">Vos paiements</h2>        
         </div>
+      </div><br>
+      
+      <div class="progress mb-4" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar bg-success" style="width: 4%">1</div>
       </div>
     </div>
+    
     @endsection

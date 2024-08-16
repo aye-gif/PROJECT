@@ -85,6 +85,8 @@
 	{{-- <link rel="stylesheet" type="text/css" href="assetts/vendor/font-awesome/css/all.min.css> --}}
 	<!-- Theme CSS -->
 	<link rel="stylesheet" type="text/css" href="../../assetts/css/style.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 </head>
 
@@ -218,15 +220,15 @@
 					   <div class="navbar navbar-expand-xl">
 						   <ul class="navbar-nav navbar-offcanvas-menu">
 
-							   <li class="nav-item"> <a class="nav-link" href="{{url('/admin')}}"><i class="bi bi-house-door fa-fw me-1"></i>Dashboard</a>	</li>
+							   <li class="nav-item"> <a class="nav-link" href="{{url('/admin')}}"><i class="bi bi-house-door fa-fw me-1"></i> Dashboard</a>	</li>
 
-							   <li class="nav-item"> <a class="nav-link" href="{{url('admin/ListeArticle')}}"><i class="bi bi-bookmark-heart fa-fw me-1"></i>Articles</a> </li>
+							   <li class="nav-item"> <a class="nav-link" href="{{url('/admin/ListeArticle')}}"><i class="bi bi-list-ul"></i> Articles</a> </li>
 
-							   <li class="nav-item"> <a class="nav-link" href="agent-activities.html"><i class="bi bi-bell fa-fw me-1"></i>Catégories</a> </li>
+							   <li class="nav-item"> <a class="nav-link" href="{{url('/admin/ListeClient')}}"><i class="bi bi-people fa-fw me-2"></i> Clients</a> </li>
 		   
-							   <li class="nav-item"> <a class="nav-link" href="{{url('admin/ListeSuivieCommande')}}"><i class="bi bi-graph-up-arrow fa-fw me-1"></i>Suivie commandes</a>	</li>
+							   {{-- <li class="nav-item"> <a class="nav-link" href="{{url('/admin/ListeSuivieCommande')}}"><i class="bi bi-calendar-check fa-fw me-2"></i> Suivie commandes</a>	</li> --}}
 
-							   <li class="nav-item"> <a class="nav-link" href="agent-reviews.html"><i class="bi bi-star fa-fw me-1"></i>Favories</a></li>
+							   <li class="nav-item"> <a class="nav-link" href="{{url('/admin/ListeTransaction')}}"><i class="bi bi-receipt fa-fw me-2"></i> Transactions</a></li>
 							   		
 						   </ul>
 					   </div>

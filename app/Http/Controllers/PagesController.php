@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Article;
 use App\Models\Categories;
 use App\Models\Couleur;
-use App\Models\Taille_article;
-use App\Models\Detail_article;
+use App\Models\TailleArticle;
+use App\Models\DetailArticle;
 use App\Models\Marque;
 use App\Models\Favorie;
 use App\Models\Commentaire;
@@ -20,8 +20,7 @@ class PagesController extends Controller
     
 
     //
-    public function home()
-    {   
+    public function home(){   
         // c'est deux requetes ci-dessous me permettrons d'afficher le 12 premiers articles femmes 
         $articles_6_f = Article::where('id','<=','6')->get();
         $articles_12_f = Article::where('id','<=','12')->orderBy('id', 'desc')->take(6)->get();
@@ -60,7 +59,86 @@ class PagesController extends Controller
         return view('client.account-password-recovery');
     }
 
+    //
+    public function info($id){
 
+        $recharticle = Article::where('id', $id)->first();
+        if ($recharticle) {
+            # code...
+
+            // cette requete me permet d'afficher les info de l'article selectionne     
+        $affiche_info_article = Article::where('id', $id)->first();
+ 
+        // cette requete me permet d'afficher la couleur sur un article selectionne
+        $affiche_couleur_article = Couleur::where('article_id', $id)->get();
+
+        // cette requete me permet d'afficher la couleur sur un article selectionne
+        $affiche_taille_article = TailleArticle::where('article_id', $id)->get();
+
+        // cette requete me permet d'afficher les detail sur l'article selectionne
+        $affiche_detail_article = DB::table('articles')->join('detail_articles', 'detail_articles.id', '=' , 'articles.detail_id')
+                                                       ->where('articles.id', $id)->first();
+        
+        // cette requete me permet de gerer les commentaires en ce qui concerne l'article selectionne
+        $affiche_commentaire_article = Commentaire::where('article_id','=',$id)->take(5)->get();
+
+        // cette requete me permet de compter le nombre total de commentaires
+        $compte_total_commentaire = DB::table('commentaires')->count();
+        
+        // cette requete me permet d'afficher les commentaires ayant 5 etoiles en ce qui concerne l'article selectionne
+        $affiche_etoile_5 = Commentaire::where('article_id', $id)->where('etoile', 5)->get();
+        
+        // cette requete me permet d'afficher les commentaires ayant 4 etoiles en ce qui concerne l'article selectionne
+        $affiche_etoile_4 = Commentaire::where('article_id', $id)->where('etoile', 4)->get();
+
+        // cette requete me permet d'afficher les commentaires ayant 3 etoiles en ce qui concerne l'article selectionne
+        $affiche_etoile_3 = Commentaire::where('article_id', $id)->where('etoile', 3)->get();
+        
+        // cette requete me permet d'afficher les commentaires ayant 2 etoiles en ce qui concerne l'article selectionne
+        $affiche_etoile_2 = Commentaire::where('article_id', $id)->where('etoile', 2)->get();
+
+        // cette requete me permet d'afficher les commentaires ayant 1 etoiles en ce qui concerne l'article selectionne
+        $affiche_etoile_1 = Commentaire::where('article_id', $id)->where('etoile', 1)->get();
+        
+        // cette requete me permet d'afficher la couleur sur un article selectionne
+        $affiche_meme_type = Article::where('id',$id)->get();
+
+                $affiche_type_article = array();
+                            foreach ($affiche_meme_type as $resultat) {
+                                $affiche_type_article[] = $resultat->type_article;
+                            }
+                $affiche_ref_categorie_article = array();
+                            foreach ($affiche_meme_type as $resultat) {
+                                $affiche_ref_categorie_article[] = $resultat->categorie_id;
+                            }
+        // cette requete me permet d'afficher d'autre article de meme type que celle selectionnée
+        $affiche_meme_type_meme_categorie = Article::where('type_article', $affiche_type_article)->where('categorie_id', $affiche_ref_categorie_article)->take(10)->get();
+        
+        // cette requete me permet d'afficher d'autre article different que celle selectionnée
+        $affiche_different_type_meme_categorie = Article::where('type_article', '<>', $affiche_type_article)->where('categorie_id', $affiche_ref_categorie_article)->take(10)->get();
+        
+        return view('shop-single-v1',[
+            'affiche_info_article' => $affiche_info_article,
+            'affiche_couleur_article' => $affiche_couleur_article,
+            'affiche_taille_article' => $affiche_taille_article,
+            'affiche_detail_article' => $affiche_detail_article,
+            'affiche_commentaire_article' => $affiche_commentaire_article,
+            'compte_total_commentaire' => $compte_total_commentaire,
+            'affiche_meme_type_meme_categorie' => $affiche_meme_type_meme_categorie,
+            'affiche_different_type_meme_categorie' => $affiche_different_type_meme_categorie,
+            'affiche_etoile_5' => $affiche_etoile_5,
+            'affiche_etoile_4' => $affiche_etoile_4,
+            'affiche_etoile_3' => $affiche_etoile_3,
+            'affiche_etoile_2' => $affiche_etoile_2,
+            'affiche_etoile_1' => $affiche_etoile_1,
+
+                                        ]
+                    );
+        }
+
+    }
+
+    //
     public function plus(){
         // cette requete me permet d'afficher les 20 premiers articles de ma base de donnee
         $affiche_20_article = DB::table('articles')->paginate(20);
@@ -106,91 +184,23 @@ class PagesController extends Controller
             );
     }
 
+    //
     public function cart(){
         return view('shop.shop-cart');
     }
 
+    //
     public function shop(){
         return view('shop.shop-single-v2');
     }
 
+    //
     public function categorie(){
         
         return view('categorie.shop-grid-rs');
     }
 
-    public function info($ref_article){
-
-        // cette requete me permet d'afficher les info de l'article selectionne     
-        $affiche_info_article = DB::table('articles')->join('couleurs', 'articles.ref_article', '=' , 'couleurs.ref_article')->join('detail_articles', 'detail_articles.ref_detail_article', '=' , 'articles.ref_detail')->where('articles.ref_article','=',$ref_article)->first();
- 
-        // cette requete me permet d'afficher la couleur sur un article selectionne
-        $affiche_couleur_article = DB::table('couleurs')->where('couleurs.ref_article','=',$ref_article)->get();
-
-        // cette requete me permet d'afficher la couleur sur un article selectionne
-        $affiche_taille_article = DB::table('taille_articles')->where('taille_articles.ref_article','=',$ref_article)->get();
-
-        // cette requete me permet d'afficher les detail sur l'article selectionne
-        $affiche_detail_article = DB::table('detail_articles')->join('articles', 'articles.ref_detail', '=' , 'detail_articles.ref_detail_article')->where('articles.ref_article','=',$ref_article)->first();
-        
-        // cette requete me permet de gerer les commentaires en ce qui concerne l'article selectionne
-        $affiche_commentaire_article = DB::table('commentaires')->where('ref_article','=',$ref_article)->take(5)->get();
-
-        // cette requete me permet de compter le nombre total de commentaires
-        $compte_total_commentaire = DB::table('commentaires')->get();
-        
-        // cette requete me permet d'afficher les commentaires ayant 5 etoiles en ce qui concerne l'article selectionne
-        $affiche_etoile_5 = DB::table('commentaires')->where('ref_article','=',$ref_article)->where('etoile','=', 5)->get();
-        
-        // cette requete me permet d'afficher les commentaires ayant 4 etoiles en ce qui concerne l'article selectionne
-        $affiche_etoile_4 = DB::table('commentaires')->where('ref_article','=',$ref_article)->where('etoile','=', 4)->get();
-
-        // cette requete me permet d'afficher les commentaires ayant 3 etoiles en ce qui concerne l'article selectionne
-        $affiche_etoile_3 = DB::table('commentaires')->where('ref_article','=',$ref_article)->where('etoile','=', 3)->get();
-        
-        // cette requete me permet d'afficher les commentaires ayant 2 etoiles en ce qui concerne l'article selectionne
-        $affiche_etoile_2 = DB::table('commentaires')->where('ref_article','=',$ref_article)->where('etoile','=', 2)->get();
-
-        // cette requete me permet d'afficher les commentaires ayant 1 etoiles en ce qui concerne l'article selectionne
-        $affiche_etoile_1 = DB::table('commentaires')->where('ref_article','=',$ref_article)->where('etoile','=', 1)->get();
-        
-        // cette requete me permet d'afficher la couleur sur un article selectionne
-        $affiche_meme_type = DB::table('articles')->where('ref_article','=',$ref_article)->get();
-
-                $affiche_type_article = array();
-                            foreach ($affiche_meme_type as $resultat) {
-                                $affiche_type_article[] = $resultat->type_article;
-                            }
-                $affiche_ref_categorie_article = array();
-                            foreach ($affiche_meme_type as $resultat) {
-                                $affiche_ref_categorie_article[] = $resultat->ref_categorie;
-                            }
-        // cette requete me permet d'afficher d'autre article de meme type que celle selectionnée
-        $affiche_meme_type_meme_categorie = DB::table('articles')->where('type_article', '=', $affiche_type_article)->where('ref_categorie', '=', $affiche_ref_categorie_article)->take(10)->get();
-        
-        // cette requete me permet d'afficher d'autre article different que celle selectionnée
-        $affiche_different_type_meme_categorie = DB::table('articles')->where('type_article', '<>', $affiche_type_article)->where('ref_categorie', '=', $affiche_ref_categorie_article)->take(10)->get();
-        
-
-
-        return view('shop-single-v1',[
-            'affiche_info_article' => $affiche_info_article,
-            'affiche_couleur_article' => $affiche_couleur_article,
-            'affiche_taille_article' => $affiche_taille_article,
-            'affiche_detail_article' => $affiche_detail_article,
-            'affiche_commentaire_article' => $affiche_commentaire_article,
-            'compte_total_commentaire' => $compte_total_commentaire,
-            'affiche_meme_type_meme_categorie' => $affiche_meme_type_meme_categorie,
-            'affiche_different_type_meme_categorie' => $affiche_different_type_meme_categorie,
-            'affiche_etoile_5' => $affiche_etoile_5,
-            'affiche_etoile_4' => $affiche_etoile_4,
-            'affiche_etoile_3' => $affiche_etoile_3,
-            'affiche_etoile_2' => $affiche_etoile_2,
-            'affiche_etoile_1' => $affiche_etoile_1,
-
-                                        ]
-                    );
-    }
+    
    // fonction me permettant d'increment le like
     public function LikeCommentaire($id){
 
@@ -212,6 +222,7 @@ class PagesController extends Controller
        return back();
     }
 
+    //
     public function DislikeCommentaire($id){
 
         $dislike = Commentaire::find($id);
@@ -234,6 +245,7 @@ class PagesController extends Controller
         return back();
     }
    
+    //
     public function type($type_article){
         
         // cette requete me permet d'afficher les articles de meme type
@@ -249,6 +261,7 @@ class PagesController extends Controller
         }
     }
 
+    //
     public function addtocomment(Request $request){
 
         if(Session::has('client')){
@@ -258,8 +271,8 @@ class PagesController extends Controller
                 $val = random_int(1, 10);
         
                 $commentaire = new Commentaire();
-                $commentaire->ref_commentaire = 'COMMENT'.substr($request->input('nom'),0,2 ).$val;
-                $commentaire->ref_article = $request->input('ref_article');
+                $commentaire->ref_commentaire = 'COMMENT'.substr($nom,0,2 ).$val;
+                $commentaire->article_id = $request->input('article');
                 $commentaire->nom = $nom;
                 $commentaire->email = $mail;
                 $commentaire->etoile = $request->input('etoile');

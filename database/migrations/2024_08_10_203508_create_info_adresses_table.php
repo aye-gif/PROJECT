@@ -13,13 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('favories', function (Blueprint $table) {
+        Schema::create('info_adresses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('article_id');
             $table->foreignId('client_id');
+            $table->string('ref_info_adresse');
+            $table->integer('telephone2');
+            $table->string('adresse');
+            $table->string('ville');
+            $table->string('commune');
+            $table->string('quartier');
+            $table->string('statut')->default('actuel');
+            $table->string('info_supplementaire');
+            $table->string('sauvegarde')->default('non');
             $table->timestamps();
 
-            $table->foreign('article_id')->references('id')->on('articles');
             $table->foreign('client_id')->references('id')->on('clients');
         });
     }
@@ -31,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('favories');
+        Schema::dropIfExists('info_adresses');
     }
 };

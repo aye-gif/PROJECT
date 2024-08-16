@@ -13,7 +13,6 @@
                         <div class="card-header border-bottom">
                             <div class="d-sm-flex justify-content-between align-items-center">
                                 <h5 class="mb-2 mb-sm-0">Liste des Détails</h5>
-                                <a href="{{url('#AjoutArticle')}}" class="btn btn-sm btn-primary mb-0">AJOUTER</a>
                             </div>
                         </div>
                         <!-- Card header END -->
@@ -26,16 +25,15 @@
                             <div class="table-responsive border-0">
                                 <table class="table align-middle p-4 mb-0 table-hover table-shrink">
                                     <!-- Table head -->
-                                    <thead class="table-light">
+                                    <thead class="table-dark">
                                         <tr>
-                                            <th scope="col" class="border-0 rounded-start">#</th>
-                                            <th scope="col" class="border-0">Rèf détail</th>
-                                            <th scope="col" class="border-0">Réf article</th>
-                                            <th scope="col" class="border-0">libélle 1</th>
-                                            <th scope="col" class="border-0">Valeur 1</th>
-                                            <th scope="col" class="border-0">libélle 2</th>
-                                            <th scope="col" class="border-0">Valeur 2</th>
-                                            <th scope="col" class="border-0 rounded-end text-center">Action</th>
+                                            <th scope="col" class="border-0 rounded-start text-center">#</th>
+                                            <th scope="col" class="border-0 text-center">Rèf détail</th>
+                                            <th scope="col" class="border-0 text-center">libélle 1</th>
+                                            <th scope="col" class="border-0 text-center">Valeur 1</th>
+                                            <th scope="col" class="border-0 text-center">libélle 2</th>
+                                            <th scope="col" class="border-0 text-center">Valeur 2</th>
+                                            {{-- <th scope="col" class="border-0 rounded-end text-center">Action</th> --}}
                                         </tr>
                                     </thead>
 
@@ -44,17 +42,16 @@
                                         <!-- Table item -->
                                         @foreach ($affiche_detail as $resultat)
                                             <tr>
-                                                <td> <h6 class="mb-0">{{$resultat->id}}</h6> </td>
-                                                <td> <h6 class="mb-0"><a href="#">{{$resultat->ref_detail_articles}}</a></h6> </td>
-                                                <td> <h6 class="mb-0"><a href="#">{{$resultat->ref_article}}</a></h6></td>
-                                                <td> <h6 class="mb-0"><a href="#">{{$resultat->libelle1}}</a></h6></td>
-                                                <td> <h6 class="mb-0"><a href="#">{{$resultat->valeur1}}</a></h6></td>
-                                                <td> <h6 class="mb-0"><a href="#">{{$resultat->libelle2}}</a></h6></td>
-                                                <td> <h6 class="mb-0"><a href="#">{{$resultat->valeur2}}</a></h6></td>
-                                                <td class="text-center"> 
+                                                <td> <h6 class="mb-0 text-center">{{$resultat->id}}</h6> </td>
+                                                <td> <h6 class="mb-0 text-center"><a href="#">{{$resultat->ref_detail_article}}</a></h6> </td>
+                                                <td> <h6 class="mb-0 text-center"><a href="#">{{$resultat->libelle1}}</a></h6></td>
+                                                <td> <h6 class="mb-0 text-center"><a href="#">{{$resultat->valeur1}}</a></h6></td>
+                                                <td> <h6 class="mb-0 text-center"><a href="#">{{$resultat->libelle2}}</a></h6></td>
+                                                <td> <h6 class="mb-0 text-center"><a href="#">{{$resultat->valeur2}}</a></h6></td>
+                                                {{-- <td class="text-center"> 
                                                     <a href="" class="btn btn-sm btn-primary mb-0">Modifier</a>
                                                     <a href="" class="btn btn-sm btn-danger mb-0">Supprimer</a>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endforeach
 
@@ -108,22 +105,22 @@
                                     <!-- Sidebar menu item START -->
                                     <ul class="nav nav-pills-primary-soft flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{url('admin/AjouterArticle')}}"><i class="bi bi-person fa-fw me-2"></i>Mes articles</a>
+                                            <a class="nav-link" href="{{url('admin/AjouterArticle')}}"><i class="bi bi-list-ul fa-fw me-2"></i>Mes articles</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{url('admin/AjouterCategorie')}}"><i class="bi bi-ticket-perforated fa-fw me-2"></i>Catégories</a>
+                                            <a class="nav-link" href="{{url('admin/AjouterCategorie')}}"><i class="bi bi-collection fa-fw me-2"></i>Catégories</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="{{url('admin/AjouterDetail')}}"><i class="bi bi-people fa-fw me-2"></i>Details</a>
+                                            <a class="nav-link active" href="{{url('admin/AjouterDetail')}}"><i class="bi bi-info-circle fa-fw me-2"></i>Details</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{url('admin/AjouterTaille')}}"><i class="bi bi-people fa-fw me-2"></i>Taille article</a>
+                                            <a class="nav-link" href="{{url('admin/AjouterTaille')}}"><i class="bi bi-rulers fa-fw me-2"></i>Taille article</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{url('admin/AjouterMarque')}}"><i class="bi bi-wallet fa-fw me-2"></i>Marques</a>
+                                            <a class="nav-link" href="{{url('admin/AjouterMarque')}}"><i class="bi bi-patch-check fa-fw me-2"></i>Marques</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{url('admin/AjouterFournisseur')}}"><i class="bi bi-heart fa-fw me-2"></i>Fournisseur</a>
+                                            <a class="nav-link" href="{{url('admin/AjouterFournisseur')}}"><i class="bi bi-truck fa-fw me-2"></i>Fournisseur</a>
                                         </li>
                                        
                                     </ul>
@@ -162,81 +159,64 @@
                                 <!-- Form START -->
                                 <form class="row g-3" action="{{url('admin/NewDetail')}}" method="POST">
                                     @csrf
-                                    <!-- Name -->
-                                    <div class="col-md-6">
-                                        <label class="form-label">Réference détail<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="ref_detail_article"  placeholder="Réference detail" required>
-                                    </div>
-    
-                                    <!-- Réference article -->
-                                    <div class="col-md-6">
-                                        <label class="form-label">Réference article<span class="text-danger">*</span></label>
-                                        <select class="form-select js-choice" data-search-enabled="true" name="ref_article">
-
-                                            @foreach ($affiche_article as $resultat)
-                                                <option value="{{$resultat->ref_article}}">{{$resultat->ref_article}}</option>
-                                            @endforeach
-                                             
-                                        </select>
-                                    </div>
     
                                     <!-- libelle 1 -->
                                     <div class="col-md-6">
-                                        <label class="form-label">libelle 1<span class="text-danger">*</span></label>
+                                        <label class="form-label">libelle 1<span class="text-danger"> *</span></label>
                                         <input type="text" name="libelle_1" class="form-control" placeholder="libelle 1">
                                     </div>
     
                                     <!-- valeur 1 -->
                                     <div class="col-md-6">
-                                        <label class="form-label">Valeur 1<span class="text-danger">*</span></label>
+                                        <label class="form-label">Valeur 1<span class="text-danger"> *</span></label>
                                         <input type="text" name="valeur_1" class="form-control" placeholder="valeur 1">
                                     </div>
 
                                     <!-- libelle 2 -->
                                     <div class="col-md-6">
-                                        <label class="form-label">libelle 2<span class="text-danger">*</span></label>
+                                        <label class="form-label">libelle 2<span class="text-danger"> *</span></label>
                                         <input type="text" name="libelle_2" class="form-control" placeholder="libelle 2">
                                     </div>
     
                                     <!-- valeur 2 -->
                                     <div class="col-md-6">
-                                        <label class="form-label">Valeur 2<span class="text-danger">*</span></label>
+                                        <label class="form-label">Valeur 2<span class="text-danger"> *</span></label>
                                         <input type="text" name="valeur_2" class="form-control" placeholder="valeur 2">
                                     </div>
 
                                     <!-- libelle 3 -->
                                     <div class="col-md-6">
-                                        <label class="form-label">libelle 3<span class="text-danger">*</span></label>
+                                        <label class="form-label">libelle 3<span class="text-danger"> *</span></label>
                                         <input type="text" name="libelle_3" class="form-control" placeholder="libelle 3">
                                     </div>
     
                                     <!-- valeur 3 -->
                                     <div class="col-md-6">
-                                        <label class="form-label">Valeur 3<span class="text-danger">*</span></label>
+                                        <label class="form-label">Valeur 3<span class="text-danger"> *</span></label>
                                         <input type="text" name="valeur_3" class="form-control" placeholder="valeur 3">
                                     </div>
                                     
                                     <!-- libelle 4 -->
                                     <div class="col-md-6">
-                                        <label class="form-label">libelle 4<span class="text-danger">*</span></label>
+                                        <label class="form-label">libelle 4<span class="text-danger"> *</span></label>
                                         <input type="text" name="libelle_4" class="form-control" placeholder="libelle 4">
                                     </div>
     
                                     <!-- valeur 4 -->
                                     <div class="col-md-6">
-                                        <label class="form-label">Valeur 4<span class="text-danger">*</span></label>
+                                        <label class="form-label">Valeur 4<span class="text-danger"> *</span></label>
                                         <input type="text" name="valeur_4" class="form-control"  placeholder="valeur 4">
                                     </div>
 
                                      <!-- libelle 5 -->
                                      <div class="col-md-6">
-                                        <label class="form-label">libelle 5<span class="text-danger">*</span></label>
+                                        <label class="form-label">libelle 5<span class="text-danger"> *</span></label>
                                         <input type="text" name="libelle_5" class="form-control" placeholder="libelle 5">
                                     </div>
     
                                     <!-- valeur 5 -->
                                     <div class="col-md-6">
-                                        <label class="form-label">Valeur 5<span class="text-danger">*</span></label>
+                                        <label class="form-label">Valeur 5<span class="text-danger"> *</span></label>
                                         <input type="text" name="valeur_5" class="form-control"  placeholder="valeur 5">
                                     </div>
     

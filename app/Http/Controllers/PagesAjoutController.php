@@ -12,8 +12,8 @@ use App\Models\Categorie;
 use App\Models\Fournisseur;
 use App\Models\Commande;
 use App\Models\Marque;
-use App\Models\Detail_article;
-use App\Models\Taille_article;
+use App\Models\DetailArticle;
+use App\Models\TailleArticle;
 
 class PagesAjoutController extends Controller
 {
@@ -46,7 +46,7 @@ class PagesAjoutController extends Controller
 
 
         $fournisseur = new Fournisseur();
-        $fournisseur->ref_detail_article = "FOURN".substr($request->input('libelle_Fournisseur'),0,2 );
+        $fournisseur->ref_fournisseur = "FOURN".substr($request->input('libelle_Fournisseur'),0,2 );
         $fournisseur->libelle_fournisseur = $request->input('libelle_Fournisseur');
         $fournisseur->telephone = $request->input('telephone');
         $fournisseur->save();
@@ -58,9 +58,8 @@ class PagesAjoutController extends Controller
     public function NewDetail(Request $request){
 
 
-        $detail = new Detail_article();
-        $detail->ref_detail_articles = $request->input('ref_detail_article');
-        $detail->ref_article = $request->input('ref_article');
+        $detail = new DetailArticle();
+        $detail->ref_detail_article =  "DETAIL";
         $detail->libelle1 = $request->input('libelle_1');
         $detail->valeur1 = $request->input('valeur_1');
         $detail->libelle2 = $request->input('libelle_2');
@@ -80,9 +79,9 @@ class PagesAjoutController extends Controller
     public function NewTaille(Request $request){
 
 
-        $taille = new Taille_article();
+        $taille = new TailleArticle();
         $taille->ref_taille_article = $request->input('ref_taille_article');
-        $taille->ref_article = $request->input('ref_article');
+        $taille->article_id = $request->input('id_article');
         $taille->libelle_taille_article = $request->input('libelle_taille_article');
         $taille->save();
  
@@ -93,42 +92,41 @@ class PagesAjoutController extends Controller
     public function NewArticle(Request $request){ 
 
         $val = random_int(1, 10000);
+
+        $image = $request->file('image_1');
+        $image2 = $request->file('image_2');
+        $image3 = $request->file('image_3');
+
+        if ($request->hasFile('image_1')) {
+            $imageName = time().'1'.'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('img/shop/catalog'), $imageName);
+            
+        }
+
+        if ($request->hasFile('image_2')) {
+            $imageName1 = time().'2'.'.'.$image2->getClientOriginalExtension();
+            $image2->move(public_path('img/shop/catalog'), $imageName1);
+            
+        }
+
+        if ($request->hasFile('image_3')) {
+            $imageName2 = time().'3'.'.'.$image3->getClientOriginalExtension();
+            $image3->move(public_path('img/shop/catalog'), $imageName2);
+            
+        }
         
         $article = new Article();
-        
-
-            $fileNameWithExt = $request->file('image_1')->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            $ext = $request->file('image_1')->getClientOriginalExtension();
-            $fileNameToStore = $fileName.'.'.$ext;
-            $path = $request->file('image_1')->storeAs('img/shop/catalog', $fileNameToStore);
-
-            $fileNameWithExt = $request->file('image_2')->getClientOriginalName();
-            $fileName1 = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            $ext = $request->file('image_2')->getClientOriginalExtension();
-            $fileNameToStore1 = $fileName1.'.'.$ext;
-            $path = $request->file('image_2')->storeAs('img/shop/catalog', $fileNameToStore1);
-
-            $fileNameWithExt = $request->file('image_3')->getClientOriginalName();
-            $fileName2 = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            $ext = $request->file('image_3')->getClientOriginalExtension();
-            $fileNameToStore2 = $fileName2.'.'.$ext;
-            $path = $request->file('image_3')->storeAs('img/shop/catalog', $fileNameToStore2);
-
-            if ($path === false) {
-                // Gérer l'erreur de téléchargement du fichier
-                return back()->withErrors(['error' => 'Erreur lors de l\'enregistrement de l\'image 1']);
-            }
          
         
-        $article->image_article = $fileNameToStore;
-        $article->image2_article = $fileNameToStore1;
-        $article->image3_article = $fileNameToStore2;
+        $article->image_article = $imageName;
+        $article->image2_article = $imageName1;
+        $article->image3_article = $imageName2;
         $article->ref_article = $request->input('ref_article');
         $article->Num_article = "NUM".time();
-        $article->ref_categorie = $request->input('ref_categorie');
-        $article->ref_marque = $request->input('ref_marque');
-        $article->ref_fournisseur = $request->input('ref_fournisseur');
+        $article->detail_id = $request->input('id_detail');
+        $article->categorie_id = $request->input('id_categorie');
+        $article->marque_id = $request->input('id_marque');
+        $article->fournisseur_id = $request->input('id_fournisseur');
         $article->type_article = $request->input('type_article');
         $article->libelle_article = $request->input('libelle_article');
         $article->prix = $request->input('prix_1');

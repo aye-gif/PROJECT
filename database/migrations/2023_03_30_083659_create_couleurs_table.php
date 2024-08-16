@@ -15,11 +15,13 @@ return new class extends Migration
     {
         Schema::create('couleurs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('article_id');
             $table->string('ref_couleur');
-            $table->string('ref_article');
             $table->string('libelle_couleur');
             $table->string('lien_couleur');
             $table->timestamps();
+
+            $table->foreign('article_id')->references('id')->on('articles');
         });
     }
 

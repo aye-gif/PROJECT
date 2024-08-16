@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('ref_commande');
             $table->string('methode_livraison');
             $table->string('statut');
+            $table->string('date_livraison');
             $table->timestamps();
         
         });

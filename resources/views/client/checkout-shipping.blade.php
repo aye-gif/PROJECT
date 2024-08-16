@@ -94,7 +94,7 @@
           <h2 class="h6 pb-3 mb-2">Choisissez la méthode d'expédition</h2>
           <form class="needs-validation" action="{{url('/client/Expedition')}}" method="post">
             @csrf
-          <div class="table-responsive">
+              <div class="table-responsive">
                   <table class="table table-hover font-size-sm border-bottom">
                     <thead>
                       <tr>

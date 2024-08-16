@@ -35,9 +35,9 @@
             </div>
           </div>
         </div>
-        <!-- Item-->
+        {{-- <!-- Item-->
         <div class="px-lg-5" style="background-color: #eba170;">
-          <div class="d-lg-flex justify-content-between align-items-center pl-lg-4"><img class="d-block order-lg-2 mr-lg-n5 flex-shrink-0" src="img/home/hero-slider/03.jpg" alt="Men Accessories">
+          <div class="d-lg-flex justify-content-between align-items-center pl-lg-4"><img class="d-block order-lg-2 mr-lg-n5 flex-shrink-0" src="img/home/hero-slider/flyer1.jpg" alt="Men Accessories">
             <div class="position-relative mx-auto mr-lg-n5 py-5 px-4 mb-lg-5 order-lg-1" style="max-width: 42rem; z-index: 10;">
               <div class="pb-lg-5 mb-lg-5 text-center text-lg-left text-lg-nowrap">
                 <h2 class="text-light font-weight-light pb-1 from-top">Complétez votre look avec</h2>
@@ -46,7 +46,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
       </div>
     </section>
     <!-- Category (Women)-->
@@ -80,9 +80,9 @@
                     
                           <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
                             <div class="card product-card"><span class="badge badge-{{ $article->couleur_statut}} badge-shadow">{{ $article->statut}}</span>
-                              <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="{{url('/favories',[$article->ref_article])}}" ><i class="czi-heart"></i></a></button><a class="card-img-top d-block overflow-hidden" href="{{url('/',[$article->ref_article])}}"><img src="{{ asset('img/shop/catalog/'.$article->image_article) }}" alt="Product"></a>
-                              <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="{{url('/',[$article->ref_article])}}">{{$article->type_article }}</a>
-                                <h3 class="product-title font-size-sm"><a href="{{url('/',[$article->ref_article])}}">{{$article->libelle_article }}</a></h3>
+                              <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="{{url('/favories',[$article->id])}}" ><i class="czi-heart"></i></a></button><a class="card-img-top d-block overflow-hidden" href="{{url('/article',[$article->id])}}"><img src="{{ asset('img/shop/catalog/'.$article->image_article) }}" alt="Product"></a>
+                              <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="{{url('/article',[$article->id])}}">{{$article->type_article }}</a>
+                                <h3 class="product-title font-size-sm"><a href="{{url('/article',[$article->id])}}">{{$article->libelle_article }}</a></h3>
                                 <div class="d-flex justify-content-between">
                                   <div class="product-price"><span class="text-accent">{{number_format($article->prix,0,",",".") }}<small> Fcfa</small></span>
                                   </div>
@@ -100,9 +100,9 @@
 
                           <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4" id="open">
                             <div class="card product-card"><span class="badge badge-{{ $article->couleur_statut}} badge-shadow">{{ $article->statut}}</span>
-                              <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="#" ><i class="czi-heart"></i></a></button><a  href="{{url('/',[$article->ref_article])}}"><img src="{{ asset('img/shop/catalog/'.$article->image_article) }}" alt="Product"></a>
-                              <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="{{url('/',[$article->ref_article])}}">{{$article->type_article }}</a>
-                                <h3 class="product-title font-size-sm"><a href="{{url('/',[$article->ref_article])}}">{{$article->libelle_article }}</a></h3>
+                              <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="#" ><i class="czi-heart"></i></a></button><a  href="{{url('/article',[$article->id])}}"><img src="{{ asset('img/shop/catalog/'.$article->image_article) }}" alt="Product"></a>
+                              <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="{{url('/article',[$article->id])}}">{{$article->type_article }}</a>
+                                <h3 class="product-title font-size-sm"><a href="{{url('/article',[$article->id])}}">{{$article->libelle_article }}</a></h3>
                                 <div class="d-flex justify-content-between">
                                   <div class="product-price"><span class="text-accent">{{number_format($article->prix,0,",",".") }}<small> Fcfa</small></span>
                                   </div>
@@ -128,9 +128,9 @@
               
                     <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
                       <div class="card product-card"><span class="badge badge-{{ $article->couleur_statut}} badge-shadow">{{ $article->statut}}</span>
-                        <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="{{url('/favories',$article->ref_article)}}" ><i class="czi-heart"></i></a></button><a class="card-img-top d-block overflow-hidden" href="{{url('/',[$article->ref_article])}}"><img src="{{ asset('img/shop/catalog/'.$article->image_article) }}" alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="{{url('/',[$article->ref_article])}}">{{$article->type_article }}</a>
-                          <h3 class="product-title font-size-sm"><a href="{{url('/',[$article->ref_article])}}">{{$article->libelle_article }}</a></h3>
+                        <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="{{url('/favories',$article->id)}}" ><i class="czi-heart"></i></a></button><a class="card-img-top d-block overflow-hidden" href="{{url('/',[$article->id])}}"><img src="{{ asset('img/shop/catalog/'.$article->image_article) }}" alt="Product"></a>
+                        <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="{{url('/',[$article->id])}}">{{$article->type_article }}</a>
+                          <h3 class="product-title font-size-sm"><a href="{{url('/',[$article->id])}}">{{$article->libelle_article }}</a></h3>
                           <div class="d-flex justify-content-between">
                             <div class="product-price"><span class="text-accent">{{number_format($article->prix,0,",",".") }}<small> Fcfa</small></span>
                             </div>
@@ -148,7 +148,7 @@
 
                     <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
                       <div class="card product-card"><span class="badge badge-{{ $article->couleur_statut}} badge-shadow">{{ $article->statut}}</span>
-                        <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="{{url('/favories',[$article->ref_article])}}" ><i class="czi-heart"></i></a></button><a class="card-img-top d-block overflow-hidden" href="{{url('/',[$article->ref_article])}}"><img src="{{ asset('img/shop/catalog/'.$article->image_article) }}" alt="Product"></a>
+                        <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="{{url('/favories',[$article->id])}}" ><i class="czi-heart"></i></a></button><a class="card-img-top d-block overflow-hidden" href="{{url('/',[$article->ref_article])}}"><img src="{{ asset('img/shop/catalog/'.$article->image_article) }}" alt="Product"></a>
                         <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="{{url('/',[$article->ref_article])}}">{{$article->type_article }}</a>
                           <h3 class="product-title font-size-sm"><a href="{{url('/',[$article->ref_article])}}">{{$article->libelle_article }}</a></h3>
                           <div class="d-flex justify-content-between">
@@ -176,10 +176,10 @@
       <div class="row">
         <!-- Banner with controls-->
         <div class="col-md-5 order-md-2">
-          <div class="d-flex flex-column h-100 overflow-hidden rounded-lg" style="background-color: #f6f8fb;">
+          <div class="d-flex flex-column h-100 overflow-hidden rounded-lg" style="background-color: #f5b1b0;">
             <div class="d-flex justify-content-between px-grid-gutter py-grid-gutter">
               <div class="order-md-2">
-                <!-- <h3 class="mb-1">POUR HOMME</h3><a class="font-size-md" href="{{url('/')}}"></a> -->
+                <h3 class="mb-1">Vietnamienne & Loose & Curly</h3><a class="font-size-md" href="{{url('/')}}"></a> 
               </div>
               <div class="cz-custom-controls order-md-1" id="for-men">
                 <button type="button"><i class="czi-arrow-left"></i></button>
@@ -292,21 +292,22 @@
         </div>
       </div>
     </section>
+
     <!-- Category (Kids)-->
     <section class="container pt-lg-4 mb-4 mb-md-5">
       <div class="row">
         <!-- Banner with controls-->
         <div class="col-md-5">
-          <div class="d-flex flex-column h-100 overflow-hidden rounded-lg" style="background-color: #f6f8fb;">
+          <div class="d-flex flex-column h-100 overflow-hidden rounded-lg" style="background-color: #eba170;">
             <div class="d-flex justify-content-between px-grid-gutter py-grid-gutter">
               <div>
-                <h3 class="mb-1">POUR ENFANT</h3><a class="font-size-md" href="{{url('/')}}"></a>
+                <h3 class="mb-1">Double drawn & Hair factory</h3><a class="font-size-md" href="{{url('/')}}"></a>
               </div>
               <div class="cz-custom-controls" id="for-kids">
                 <button type="button"><i class="czi-arrow-left"></i></button>
                 <button type="button"><i class="czi-arrow-right"></i></button>
               </div>
-            </div><a class="d-none d-md-block mt-auto" href="{{url('/')}}"><img class="d-block w-100" src="img/home/categories/cat-lg03.jpg" alt="Pour Enfant"></a>
+            </div><a class="d-none d-md-block mt-auto" href="{{url('/')}}"><img class="d-block w-100" src="img/home/categories/cat-lg06.jpg" alt="Pour Enfant"></a>
           </div>
         </div>
         <!-- Product grid (enfant)-->
@@ -413,6 +414,7 @@
       </div>
     </section>
     <!-- Shop by brand-->
+
     <section class="container py-lg-4">
       <h2 class="h3 text-center pb-4">Magasinez par marque</h2>
       <div class="row">
