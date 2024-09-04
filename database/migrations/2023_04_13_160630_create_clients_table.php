@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->string('ref_client');
-            $table->string('image_client')->default('01.jpg');
+            $table->string('image_client')->default('logo_client.jpg');
             $table->string('nom');
             $table->string('prenoms');
             $table->string('email')->unique();

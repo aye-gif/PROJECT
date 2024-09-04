@@ -83,7 +83,7 @@
           <!-- Autor info-->
           <div class="d-sm-flex justify-content-between align-items-center bg-secondary p-4 rounded-lg mb-grid-gutter">
             <div class="media align-items-center">
-              <div class="img-thumbnail rounded-circle position-relative" style="width: 6.375rem;"><span class="badge badge-warning" data-toggle="tooltip" title="Reward points">{{Session('client')->id}}</span><img class="rounded-circle" src="{{ asset('img/shop/client/'.Session('client')->image_client) }}" alt="{{Session('client')->nom}}"></div>
+              <div class="img-thumbnail rounded-circle position-relative" style="width: 6.375rem;"><span class="badge badge-warning" data-toggle="tooltip" title="Reward points">{{Session('client')->id}}</span><img class="rounded-circle" src="{{ asset('img/shop/client/logo_client.jpg') }}" alt="{{Session('client')->nom}}"></div>
               <div class="media-body pl-3">
                 <h3 class="font-size-base mb-0">{{Session('client')->nom.' '.Session('client')->prenoms}}</h3><span class="text-accent font-size-sm">{{Session('client')->email}}</span>
               </div>

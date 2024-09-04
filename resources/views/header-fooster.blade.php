@@ -94,7 +94,7 @@
       <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
       <div class="navbar-sticky bg-light">
         <div class="navbar navbar-expand-lg navbar-light">
-          <div class="container"><a class="navbar-brand d-none d-sm-block mr-3 flex-shrink-0" href="{{url('/')}}" style="min-width: 7rem;"><img width="142" src="../../img/LogoVS.png" alt="VirtuallStore"/></a><a class="navbar-brand d-sm-none mr-2" href="{{url('/')}}" style="min-width: 4.625rem;"><img width="70" src="../../img/LogoVSmini.png" alt="VirtuallStore"/></a>
+          <div class="container"><a class="navbar-brand d-none d-sm-block mr-3 flex-shrink-0" href="{{url('/')}}" style="min-width: 7rem;"><img width="142" src="../../img/Logo.png" alt="VirtuallStore"/></a><a class="navbar-brand d-sm-none mr-2" href="{{url('/')}}" style="min-width: 4.625rem;"><img width="70" src="../../img/LogoVSmini.png" alt="VirtuallStore"/></a>
             
                 <div class="input-group-overlay d-none d-lg-flex mx-4">
                   <form action="{{ url('recherche') }}" method="POST" class="input-group">
@@ -249,7 +249,7 @@
         <div class="container">
           <div class="row pb-2">
             <div class="col-md-6 text-center text-md-left mb-4">
-              <div class="text-nowrap mb-4"><a class="d-inline-block align-middle mt-n1 mr-3" href="#"><img class="d-block" width="117" src="../../img/footer-logo-light.png" alt="Virtuall Store"/></a>
+              <div class="text-nowrap mb-4"><a class="d-inline-block align-middle mt-n1 mr-3" href="#"><img class="d-block" width="117" src="../../img/LogoVSmini.png" alt="Virtuall Store"/></a>
                 <div class="btn-group dropdown disable-autohide">
                   <button class="btn btn-outline-light border-light btn-sm"><img class="mr-2" width="20" src="../../img/flags/ci.png" alt="Cote d'ivoire"/>CI / Fcfa
                   </button>

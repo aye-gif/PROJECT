@@ -238,7 +238,7 @@
                 @foreach ($affiche_commentaire_article as $resultat)
                     <div class="product-review pb-4 mb-4 border-bottom">
                       <div class="d-flex mb-3">
-                        <div class="media media-ie-fix align-items-center mr-4 pr-2"><img class="rounded-circle" width="80" src="img/shop/reviews/01.jpg" alt="Rafael Marquez"/>
+                        <div class="media media-ie-fix align-items-center mr-4 pr-2"><img class="rounded-circle" width="60" src="{{asset('img/shop/reviews/01.jpg')}}" alt="Rafael Marquez"/>
                           <div class="media-body pl-3">
                             <h6 class="font-size-sm mb-0">{{ $resultat->nom }}</h6><span class="font-size-ms text-muted">{{ $resultat->date }}</span>
                           </div>
@@ -258,10 +258,10 @@
                       </div>
                       <p class="font-size-md mb-2">{{ $resultat->commentaire }}</p>
 
-                      <div class="text-nowrap" id="commentaire-{{$resultat->id}}">
+                      {{-- <div class="text-nowrap" id="commentaire-{{$resultat->id}}">
                         <a class="btn-like" data-comment-id="1" href="{{url('CommentLike/'.$resultat->id)}}"><span class="like-count">{{$resultat->like_comment}}</span></a>
                         <a class="btn-dislike" data-comment-id="1" href="{{url('CommentDislike/'.$resultat->id)}}"><span class="dislike-count">{{$resultat->dislike_comment}}</span></a>
-                      </div>
+                      </div> --}}
                     </div>
                 @endforeach
               @else

@@ -145,7 +145,11 @@ class ClientController extends Controller
             'telephone' => 'required|max:10|unique:clients',
             'email' => 'email|required|unique:clients',
             'password' => 'required|min:4'
-        ]);
+        ],[
+            'telephone.required' => 'Le champ nom est obligatoire.',
+            'telephone.unique' => 'Numéro de télephone déja utilisé.',
+            'email.unique' => 'Email déja utilisé.',
+       ]);
         
         $val = random_int(1, 10);
 
@@ -378,7 +382,7 @@ class ClientController extends Controller
         $SuivieCommande->ref_suivie_commande = 'SU'.'COMD'.substr(Session('client')->nom,0,2 ).time();
         $SuivieCommande->ref_commande = 'COMD'.substr(Session('client')->nom,0,4 ).time();
         $SuivieCommande->methode_livraison = Session('method_livraison');
-        $SuivieCommande->statut = 'etape2';
+        $SuivieCommande->statut = 'etape1';
         $SuivieCommande->date_livraison = $dateLivraison;
 
         $SuivieCommande->save();
@@ -396,7 +400,11 @@ class ClientController extends Controller
         $infocommande = SuivieCommande::where('ref_commande',$numero)->first();
         if($infocommande){
 
-            $detailcommande = SuivieCommande::where('ref_commande',$infocommande->ref_commande)->first();
+            $detailcommande = DB::table('suivie_commandes')->join('commandes', 'suivie_commandes.ref_commande', '=', 'commandes.ref_commande')
+                                               ->where('suivie_commandes.ref_commande', $infocommande->ref_commande)
+                                               ->first(); 
+
+            // $detailcommande = SuivieCommande::where('ref_commande',$infocommande->ref_commande)->first();
             return view('client.order-tracking',['detailcommande' => $detailcommande]);
         }
 

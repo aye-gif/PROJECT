@@ -72,10 +72,10 @@
                 <h3 class="font-weight-normal">0<small> Fcfa</small></h3>
               @endif
             </div>
-            <div class="form-group mb-4">
+            {{-- <div class="form-group mb-4">
               <label class="mb-3" for="order-comments"><span class="badge badge-info font-size-xs mr-2">Note</span><span class="font-weight-medium">Commentaires supplémentaires</span></label>
               <textarea class="form-control" rows="6" id="order-comments"></textarea>
-            </div>
+            </div> --}}
             <div class="accordion" id="order-options">
                 <div class="card">
                   <div class="card-header">

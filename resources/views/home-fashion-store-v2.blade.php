@@ -16,9 +16,9 @@
           <div class="d-lg-flex justify-content-between align-items-center pl-lg-4"><img class="d-block order-lg-2 mr-lg-n5 flex-shrink-0" src="img/home/hero-slider/02.jpg" alt="Women Sportswear">
             <div class="position-relative mx-auto mr-lg-n5 py-5 px-4 mb-lg-5 order-lg-1" style="max-width: 42rem; z-index: 10;">
               <div class="pb-lg-5 mb-lg-5 text-center text-lg-left text-lg-nowrap">
-                <h2 class="text-light font-weight-light pb-1 from-bottom">Dépêchez-vous! Offre d’une durée limitée.</h2>
-                <h3 class="text-light display-4 from-bottom delay-1">Viens prendre ton maillot </h1>
-                <p class="font-size-lg text-light pb-3 from-bottom delay-2">Réal, Barça, Chelsea, Man blue, Arsenal, PSG, Marseille, Bayern, Liverkusen</p><a class="btn btn-primary scale-up delay-4" href="{{url('/')}}">Acheter maintenant<i class="czi-arrow-right ml-2 mr-n1"></i></a>
+                <h2 class="text-light font-weight-light pb-1 from-bottom"> </h2>
+                <h3 class="text-light display-4 from-bottom delay-1">Le secret d’un look parfait ?</h1>
+                <p class="font-size-lg text-light pb-3 from-bottom delay-2">Transformez votre look en un clin d'œil avec nos perruques haut de gamme ! </p><a class="btn btn-primary scale-up delay-4" href="#perruques-importees" >Acheter maintenant<i class="czi-arrow-right ml-2 mr-n1"></i></a>
               </div>
             </div>
           </div>
@@ -28,9 +28,9 @@
           <div class="d-lg-flex justify-content-between align-items-center pl-lg-4"><img class="d-block order-lg-2 mr-lg-n5 flex-shrink-0" src="img/home/hero-slider/01.jpg" alt="Summer Collection">
             <div class="position-relative mx-auto mr-lg-n5 py-5 px-4 mb-lg-5 order-lg-1" style="max-width: 42rem; z-index: 10;">
               <div class="pb-lg-5 mb-lg-5 text-center text-lg-left text-lg-nowrap">
-                <h2 class="text-light font-weight-light pb-1 from-left">Vient d’arriver!</h2>
-                <h1 class="text-light display-4 from-left delay-1">Immense collection d’été</h1>
-                <p class="font-size-lg text-light pb-3 from-left delay-2">Maillots de bain, hauts, shorts, lunettes de soleil &amp; beaucoup plus...</p><a class="btn btn-primary scale-up delay-4" href="{{url('/')}}">Acheter maintenant<i class="czi-arrow-right ml-2 mr-n1"></i></a>
+                <h2 class="text-light font-weight-light pb-1 from-left">Révélez votre beauté avec nos perruques importées.</h2>
+                <h1 class="text-light display-4 from-left delay-1">Trouvez la vôtre et brillez de mille feux !</h1>
+                <p class="font-size-lg text-light pb-3 from-left delay-2"></p><a class="btn btn-primary scale-up delay-4" href="#perruques-importees">Acheter maintenant<i class="czi-arrow-right ml-2 mr-n1"></i></a>
               </div>
             </div>
           </div>
@@ -50,11 +50,11 @@
       </div>
     </section>
     <!-- Category (Women)-->
-    <section class="container pt-lg-3 mb-4 mb-sm-5">
+    <section id="perruques-importees" class="container pt-lg-3 mb-4 mb-sm-5">
       <div class="row">
         <!-- Banner with controls-->
         <div class="col-md-5">
-          <div class="d-flex flex-column h-100 overflow-hidden rounded-lg" style="background-color: #f6f8fb;">
+          <div class="d-flex flex-column h-100 overflow-hidden rounded-lg" style="background-color: #6b5c5d;">
             <div class="d-flex justify-content-between px-grid-gutter py-grid-gutter">
               <div>
                 <!-- <h3 class="mb-1">POUR FEMME</h3><a class="font-size-md" href="{{url('/')}}"></a> -->
@@ -78,9 +78,9 @@
                         <!-- nous affichons ici 6 images de vetement et autre pour la femme -->
                         @foreach($articles_6_f as $article)
                     
-                          <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
-                            <div class="card product-card"><span class="badge badge-{{ $article->couleur_statut}} badge-shadow">{{ $article->statut}}</span>
-                              <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="{{url('/favories',[$article->id])}}" ><i class="czi-heart"></i></a></button><a class="card-img-top d-block overflow-hidden" href="{{url('/article',[$article->id])}}"><img src="{{ asset('img/shop/catalog/'.$article->image_article) }}" alt="Product"></a>
+                          <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4 border">
+                            <div class="card product-card border"><span class="badge badge-{{ $article->couleur_statut}} badge-shadow">{{ $article->statut}}</span>
+                              <button class="btn-wishlist btn-sm " data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="{{url('/favories',[$article->id])}}" ><i class="czi-heart"></i></a></button><a class="card-img-top d-block overflow-hidden" href="{{url('/article',[$article->id])}}"><img class="img-fluid rounded mx-auto d-block border"  width="232px" height="132px" src="{{ asset('img/shop/catalog/'.$article->image_article) }}" alt="Product"></a>:
                               <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="{{url('/article',[$article->id])}}">{{$article->type_article }}</a>
                                 <h3 class="product-title font-size-sm"><a href="{{url('/article',[$article->id])}}">{{$article->libelle_article }}</a></h3>
                                 <div class="d-flex justify-content-between">
@@ -415,7 +415,7 @@
     </section>
     <!-- Shop by brand-->
 
-    <section class="container py-lg-4">
+    {{-- <section class="container py-lg-4">
       <h2 class="h3 text-center pb-4">Magasinez par marque</h2>
       <div class="row">
         <div class="col-md-3 col-sm-4 col-6"><a class="d-block bg-white box-shadow-sm rounded-lg py-3 py-sm-4 mb-grid-gutter" href="#"><img class="d-block mx-auto" src="img/shop/brands/01.png" style="width: 150px;" alt="Brand"></a></div>
@@ -431,7 +431,8 @@
         <div class="col-md-3 col-sm-4 col-6"><a class="d-block bg-white box-shadow-sm rounded-lg py-3 py-sm-4 mb-grid-gutter" href="#"><img class="d-block mx-auto" src="img/shop/brands/11.png" style="width: 150px;" alt="Brand"></a></div>
         <div class="col-md-3 col-sm-4 col-6"><a class="d-block bg-white box-shadow-sm rounded-lg py-3 py-sm-4 mb-grid-gutter" href="#"><img class="d-block mx-auto" src="img/shop/brands/12.png" style="width: 150px;" alt="Brand"></a></div>
       </div>
-    </section>
+    </section> --}}
+
     <!-- Product widgets-->
     <section class="container pt-md-3 pb-4 pb-md-5 mb-lg-2">
       <div class="row">

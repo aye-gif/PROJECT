@@ -13,7 +13,6 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
               <li class="breadcrumb-item"><a class="text-nowrap" href="{{url('/')}}"><i class="czi-home"></i>Acceuil</a></li>
-              <li class="breadcrumb-item text-nowrap"><a href="{{url('/plus')}}">Shop</a>
               </li>
               <li class="breadcrumb-item text-nowrap active" aria-current="page">Expédition</li>
             </ol>

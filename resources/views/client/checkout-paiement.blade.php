@@ -11,7 +11,6 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
               <li class="breadcrumb-item"><a class="text-nowrap" href="{{url('/')}}"><i class="czi-home"></i>Acceuil</a></li>
-              <li class="breadcrumb-item text-nowrap"><a href="{{url('/plus')}}">Shop</a>
               </li>
               <li class="breadcrumb-item text-nowrap active" aria-current="page">Paiement</li>
             </ol>
@@ -54,7 +53,7 @@
             </div>
             <ul class="list-unstyled font-size-sm pb-2 border-bottom">
               <li class="d-flex justify-content-between align-items-center"><span class="mr-2">Total :</span><span class="text-right">{{number_format(Session::get('cart')->totalPrice,0,",",".")}}<small> Fcfa</small></span></li>
-              <li class="d-flex justify-content-between align-items-center"><span class="mr-2">Frais Livraison :</span><span class="text-right">{{Session('valeur_livraison')}}<small> Fcfa</small></span></li>
+              <li class="d-flex justify-content-between align-items-center"><span class="mr-2">Frais Livraison :</span><span class="text-right">{{number_format(Session('valeur_livraison'),0,",",".")}}<small> Fcfa</small></span></li>
               @if (Session::has('CodePromo'))
                  <li class="d-flex justify-content-between align-items-center"><span class="mr-2">Réduction :</span><span class="text-right">- {{Session('ValeurPromo')}}<small> Fcfa</small></span></li>
                  @else

@@ -229,10 +229,14 @@
           <h2 class="h6 pb-3 mb-2">Vos paiements</h2>        
         </div>
       </div><br>
-      
-      <div class="progress mb-4" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-        <div class="progress-bar bg-success" style="width: 4%">1</div>
+      <div class="d-sm-flex flex-wrap justify-content-between align-items-center text-center pt-4">
+        <div class="custom-control custom-checkbox mt-2 mr-3">
+          <h2 class="h6 pb-3 mb-2">Nombre total de jour :</h2>  
+          <h2 class="h6 pb-3 mb-2">Nombre jour déja payé :</h2> 
+          <h2 class="h6 pb-3 mb-2">Nombre jour restant :</h2>        
+        </div>
       </div>
+      
     </div>
     
     @endsection
