@@ -159,8 +159,17 @@ use App\Http\Controllers\PaiementCinetpayController;
     // pour afficher les articles de meme type et categorie
     Route::get('/type/{type_article}', [PagesController::class, 'type']);
 
-     // pour gerer le mot de pass oublié
-     Route::get('/client/PasswordForget', [PagesController::class, 'PasswordForget']);
+    // pour afficher les articles de meme type et categorie
+    Route::get('/resetpwd/{token}', [PagesController::class, 'resetpwd']);
+
+    // pour gerer le mot de pass oublié
+    Route::get('/client/PasswordForget', [PagesController::class, 'PasswordForget']);
+
+    // pour gerer le mot de pass oublié
+    Route::post('/client/reset/PasswordForget', [ClientController::class, 'ResetPasswordForget']);
+
+    // pour gerer le mot de pass oublié
+    Route::post('/client/password/reset', [ClientController::class, 'NewPassword']);
 
    
 

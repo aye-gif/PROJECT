@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('prenoms');
             $table->string('email')->unique();
             $table->string('telephone');
-            $table->string('password');
+            $table->string('password')->nullable();
+            $table->string('token')->nullable();
             $table->timestamps();
         });
     }

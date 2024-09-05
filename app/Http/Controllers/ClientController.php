@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Article;
+use Mailjet\Resources;
 use App\Models\Cart;
-use App\Models\Client;
+use Validator;
+use Illuminate\Support\Str;
 use App\Models\Transaction;
 use App\Models\Favorie; 
 use App\Models\InfoAdresse;
@@ -18,6 +20,8 @@ use App\Models\Commande;
 use App\Models\SuivieCommande;
 use App\Mail\TestMail;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
+use App\Models\Client as ClientModel;
 
 class ClientController extends Controller
 {
@@ -285,7 +289,8 @@ class ClientController extends Controller
     }
 
     //pour la connexion au compte utilisateur
-   public function logout(){
+    public function logout(){
+
         Session::forget('client');
        return redirect('/');
     }
@@ -420,5 +425,109 @@ class ClientController extends Controller
         }
     }
     
-    
+    public function resetPasswordForget(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:clients,email',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $client = ClientModel::where('email', $request->email)->first();
+
+        if (!$client) {
+            return response()->json(['message' => 'Client non trouvé'], 404);
+        }else {
+            # code...
+            $token = Str::random(60);
+
+            $client->update([
+                'password' => null,
+                'token' => $token, 
+            ]);
+        
+
+            DB::beginTransaction();
+
+            try {
+                
+
+                $mailjetClient = new Client([
+                    'base_uri' => 'https://api.mailjet.com/v3.1/',
+                ]);
+
+                $response = $mailjetClient->request('POST', 'send', [
+                    'json' => [
+                        'Messages' => [
+                            [
+                                'From' => [
+                                    'Email' => "aye.okaingne@uvci.edu.ci",
+                                    'Name' => "alice"
+                                ],
+                                'To' => [
+                                    [
+                                        'Email' => $client->email,
+                                        'Name' => $client->nom
+                                    ]
+                                ],
+                                'TemplateID' => 6265924,
+                                'TemplateLanguage' => true,
+                                'Subject' => "Réinitialisation de mot de passe",
+                                'Variables' => [
+                                    'name' => $client->nom,
+                                    'token' => $token
+                                ]
+                            ]
+                        ]
+                    ],
+                    'auth' => [config('services.mailjet.key'), config('services.mailjet.secret')]
+                ]);
+
+                if ($response->getStatusCode() != 200 || json_decode((string) $response->getBody())->Messages[0]->Status != 'success') {
+                    throw new \Exception('Échec de envoi de email');
+                }
+
+                DB::commit();
+                return view('client.mail-send');
+
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return response()->json(['message' => 'Une erreur est survenue lors de envoi de email.'], 500);
+            }
+
+        }
+    }
+
+    public function NewPassword(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'token' => 'required',
+            'password' => 'required|string|confirmed|min:8'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('error','mauvais mot de passe ou non conforme');
+        }
+
+        $Client = ClientModel::where('token', $request->input('token'))->first();
+
+            if (!$Client) {
+                return back()->with('error','error lors de la renitialisation du mot de passe, veuillez réessayer plus tard ou contacter le service clientèle.');
+            }else {
+                # code... 
+                $Client->update([
+                    'token' => null,
+                    'password' =>bcrypt($request->input('password')),
+                ]);
+
+                return redirect('/client/signin');
+                
+            }
+
+    }
+
+
+
 }

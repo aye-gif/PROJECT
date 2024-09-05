@@ -55,8 +55,14 @@ class PagesController extends Controller
             ]
         );
     }
+
     public function PasswordForget(){
         return view('client.account-password-recovery');
+    }
+
+    public function resetpwd($token){
+        return view('client.resetpwd',
+        ['token' => $token]);
     }
 
     //

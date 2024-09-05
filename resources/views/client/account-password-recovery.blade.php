@@ -16,10 +16,11 @@
             <li><span class="text-primary mr-2">3.</span>Utilisez le code pour changer votre mot de passe sur notre site Web sécurisé.</li>
           </ol>
           <div class="card py-2 mt-4">
-            <form class="card-body needs-validation" novalidate>
+            <form action="{{ url('/client/reset/PasswordForget' ) }}" method="POST">
+              @csrf
               <div class="form-group">
                 <label for="recover-email">Entrez votre adresse e-mail</label>
-                <input class="form-control" type="email" id="recover-email" required>
+                <input class="form-control" type="email" id="recover-email" name="email" required>
                 <div class="invalid-feedback">Veuillez fournir une adresse e-mail valide.</div>
               </div>
               <button class="btn btn-primary" type="submit">Obtenir un nouveau mot de passe</button>
