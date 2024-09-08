@@ -99,8 +99,8 @@
 		<div class="container">
 			<!-- Logo START -->
 			<a class="navbar-brand" href="{{url('/')}}">
-				<img class="light-mode-item navbar-brand-item" src="../../img/LogoVs.png" alt="VirtuallStore">
-				<img class="dark-mode-item navbar-brand-item" src="../../img/LogoVs.png" alt="VirtuallStore">
+				<img class="light-mode-item navbar-brand-item" src="../../img/logo.png" alt="MPYSTORE">
+				<img class="dark-mode-item navbar-brand-item" src="../../img/logo.png" alt="MPYSTORE">
 			</a>
 			<!-- Logo END -->
 			

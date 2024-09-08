@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreignId('categorie_id');
             $table->foreignId('marque_id');
             $table->foreignId('fournisseur_id');
-            $table->foreignId('client_id');
             $table->string('type_article');
             $table->string('libelle_article');
             $table->string('image_article')->default('LOGO.png');
@@ -38,7 +37,6 @@ return new class extends Migration
             $table->foreign('categorie_id')->references('id')->on('categories');
             $table->foreign('marque_id')->references('id')->on('marques');
             $table->foreign('fournisseur_id')->references('id')->on('fournisseurs');
-            $table->foreign('client_id')->references('id')->on('clients');
         });
     }
 

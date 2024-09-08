@@ -157,7 +157,7 @@ class ClientController extends Controller
         
         $val = random_int(1, 10);
 
-        $client = new Client();
+        $client = new ClientModel();
         $client->ref_client = 'CLIENT'.substr($request->input('nom'),0,2 ).$val;
         $client->nom = $request->input('nom');
         $client->prenoms = $request->input('prenoms');
@@ -178,7 +178,7 @@ class ClientController extends Controller
             'email' => 'email|required'
         ]);
 
-        $client = Client::where('email',$request->email)->first();
+        $client = ClientModel::where('email',$request->email)->first();
 
         if($client){
             if (Hash::check($request->input('password'),$client->password)) {
@@ -195,7 +195,7 @@ class ClientController extends Controller
     public function account($ref_client){
         
         // cette requete me permet au client d'avoir acces a son compte apres s'etre connecter
-        $affiche_info_client = Client::where('ref_client','=',$ref_client)->first();
+        $affiche_info_client = ClientModel::where('ref_client','=',$ref_client)->first();
         return view('client.account-profile',[
             'affiche_info_client' => $affiche_info_client
         ]);
@@ -221,7 +221,7 @@ class ClientController extends Controller
             'image' => 'max:2048|mimes:jpeg,png,jpg'
         ]);
     
-        $client = Client::find($id);
+        $client = ClientModel::find($id);
     
         if ($request->hasFile('image_client')) {
             $image = $request->file('image_client');
@@ -265,8 +265,8 @@ class ClientController extends Controller
         }   
     }
 
-     //pour la connexion au compte utilisateur tickets
-     public function tickets(){
+    //pour la connexion au compte utilisateur tickets
+    public function tickets(){
         
         return view('client.account-tickets');
     }

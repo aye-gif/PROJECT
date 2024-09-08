@@ -137,7 +137,7 @@ class PagesAjoutController extends Controller
 
         $article->save();
  
-        return back();
+        return redirect('/admin/ListeArticle');
 
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\Admin;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Article;
 use App\Models\Categorie;
 use App\Models\Fournisseur;
@@ -40,51 +41,109 @@ class AdminController extends Controller
             
             'emailadmin' => 'email|required'
         ]);
+        $admin = Admin::where('email',$request->emailadmin)->first();
+        if ($admin) {
+            # code...
+            if (Hash::check($request->input('passwordadmin'),$admin->password)) {
+                # code...
 
-        $admin = DB::table('admins')->where('email','=',$request->emailadmin)->where('password','=',$request->passwordadmin)->first();
-        if($admin){
                 Session::put('admin',$admin);
 
-            // Obtenir la date du jour au format 'YYYY-MM-DD'
-            $today = Carbon::now()->format('Y-m-d');
+                    // Obtenir la date du jour au format 'YYYY-MM-DD'
+                    $today = Carbon::now()->format('Y-m-d');
 
-            // Effectuer la requête pour obtenir les transactions du jour
-            $transactions = DB::table('transactions')
-                                ->join('commandes','commandes.id','=','transactions.commande_id')
-                                ->join('clients','clients.id','=','commandes.client_id')
-                                ->whereRaw("JSON_CONTAINS(contenue, JSON_OBJECT('date', ?), '$')", [$today])
-                                ->get();
+                    // Effectuer la requête pour obtenir les transactions du jour
+                    $transactions = DB::table('transactions')
+                                        ->join('commandes','commandes.id','=','transactions.commande_id')
+                                        ->join('clients','clients.id','=','commandes.client_id')
+                                        ->whereRaw("JSON_CONTAINS(contenue, JSON_OBJECT('date', ?), '$')", [$today])
+                                        ->get();
 
-            // cette requete me permet d'afficher les commandes
-            $affiche_comandes = DB::table('commandes')->join('clients','clients.id','=','commandes.client_id')
-                                                      ->select('commandes.*', 'clients.nom', 'clients.prenoms', 'clients.telephone')
-                                                      ->get();
+                    // cette requete me permet d'afficher les commandes
+                    $affiche_comandes = DB::table('commandes')->join('clients','clients.id','=','commandes.client_id')
+                                                              ->select('commandes.*', 'clients.nom', 'clients.prenoms', 'clients.telephone')
+                                                              ->get();
 
-            // cette requete me permet d'afficher les clients
-            $affiche_client = Client::All();
+                    // cette requete me permet d'afficher les clients
+                    $affiche_client = Client::All();
 
-            // cette requete me permet d'afficher les favories
-            $affiche_favorie = Favorie::All();
+                    // cette requete me permet d'afficher les favories
+                    $affiche_favorie = Favorie::All();
 
-            // cette requete me permet d'afficher les fournisseurs
-            $affiche_fournisseur = Fournisseur::All();
+                    // cette requete me permet d'afficher les fournisseurs
+                    $affiche_fournisseur = Fournisseur::All();
 
-            $affiche_comandes->transform(function($affiche_cart, $key){
-                    $affiche_cart->cart = unserialize($affiche_cart->cart);
+                    $affiche_comandes->transform(function($affiche_cart, $key){
+                            $affiche_cart->cart = unserialize($affiche_cart->cart);
 
-                return $affiche_cart;
-            });
+                        return $affiche_cart;
+                    });
 
-            return view('admin.agent-dashboard',[
-                'affiche_comandes' => $affiche_comandes,
-                'affiche_client' => $affiche_client,
-                'affiche_favorie' => $affiche_favorie,
-                'affiche_fournisseur' => $affiche_fournisseur,
-                'affiche_transactions' => $transactions,
-                'affiche_date' => $today,
-            ]);
+                    return view('admin.agent-dashboard',[
+                                'affiche_comandes' => $affiche_comandes,
+                                'affiche_client' => $affiche_client,
+                                'affiche_favorie' => $affiche_favorie,
+                                'affiche_fournisseur' => $affiche_fournisseur,
+                                'affiche_transactions' => $transactions,
+                                'affiche_date' => $today,
+                            ]);
+            }
+
+            
         }
-        return back()->with('error', "Vous n'avez pas de compte avec cet email");
+        
+
+        // $this->validate($request,[
+            
+        //     'emailadmin' => 'email|required'
+        // ]);
+
+        // $admin = Admin::where('email',$request->emailadmin)->where('password',$request->passwordadmin)->first();
+        // if($admin){
+        //         // Session::put('admin',$admin);
+
+        //     // Obtenir la date du jour au format 'YYYY-MM-DD'
+        //     $today = Carbon::now()->format('Y-m-d');
+
+        //     // Effectuer la requête pour obtenir les transactions du jour
+        //     $transactions = DB::table('transactions')
+        //                         ->join('commandes','commandes.id','=','transactions.commande_id')
+        //                         ->join('clients','clients.id','=','commandes.client_id')
+        //                         ->whereRaw("JSON_CONTAINS(contenue, JSON_OBJECT('date', ?), '$')", [$today])
+        //                         ->get();
+
+        //     // cette requete me permet d'afficher les commandes
+        //     $affiche_comandes = DB::table('commandes')->join('clients','clients.id','=','commandes.client_id')
+        //                                               ->select('commandes.*', 'clients.nom', 'clients.prenoms', 'clients.telephone')
+        //                                               ->get();
+
+        //     // cette requete me permet d'afficher les clients
+        //     $affiche_client = Client::All();
+
+        //     // cette requete me permet d'afficher les favories
+        //     $affiche_favorie = Favorie::All();
+
+        //     // cette requete me permet d'afficher les fournisseurs
+        //     $affiche_fournisseur = Fournisseur::All();
+
+        //     $affiche_comandes->transform(function($affiche_cart, $key){
+        //             $affiche_cart->cart = unserialize($affiche_cart->cart);
+
+        //         return $affiche_cart;
+        //     });
+
+        //     return view('admin.agent-dashboard',[
+        //         'affiche_comandes' => $affiche_comandes,
+        //         'affiche_client' => $affiche_client,
+        //         'affiche_favorie' => $affiche_favorie,
+        //         'affiche_fournisseur' => $affiche_fournisseur,
+        //         'affiche_transactions' => $transactions,
+        //         'affiche_date' => $today,
+        //     ]);
+        // }
+
+        // // return back()->with('error', "Vous n'avez pas de compte avec cet email");
+
     }
 
     public function SearchTransaction(Request $request){

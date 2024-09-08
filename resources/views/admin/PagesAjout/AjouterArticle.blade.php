@@ -155,8 +155,8 @@
                                     <!-- image article 1 -->
                                     <div class="col-12">
                                         <div class="input-group mb-3">
-                                            <input type="hidden" class="form-control" id="inputGroupFile02" name="id" accept=".png, .jpeg, .jpg" value="" required>
-                                            <input type="file" class="form-control" id="inputGroupFile02" name="image_1" required>
+                                            <input type="hidden" class="form-control" id="inputGroupFile02" name="id"  required>
+                                            <input type="file" class="form-control" id="inputGroupFile02" name="image_1" accept=".png, .jpeg, .jpg"  required>
                                             <label class="input-group-text" for="inputGroupFile02">Image 1</label>
                                         </div>  
                                     </div>
