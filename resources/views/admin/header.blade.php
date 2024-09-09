@@ -70,7 +70,7 @@
 	</script>
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="../img/LogoVSmini.png">
+	<link rel="shortcut icon" href="../../img/LogoVSmini.png">
 
 	<!-- Google Font -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -148,11 +148,11 @@
 
 						<!-- Links -->
 						<li> <hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#"><i class="bi bi-bookmark-check fa-fw me-2"></i>My Bookings</a></li>
+						{{-- <li><a class="dropdown-item" href="#"><i class="bi bi-bookmark-check fa-fw me-2"></i>My Bookings</a></li>
 						<li><a class="dropdown-item" href="#"><i class="bi bi-heart fa-fw me-2"></i>My Wishlist</a></li>
 						<li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>Settings</a></li>
-						<li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Help Center</a></li>
-						<li><a class="dropdown-item bg-danger-soft-hover" href="#"><i class="bi bi-power fa-fw me-2"></i>Sign Out</a></li>
+						<li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Help Center</a></li> --}}
+						<li><a class="dropdown-item bg-danger-soft-hover" href="{{url('/lagoutAdmin')}}"><i class="bi bi-power fa-fw me-2"></i>Se deconnecter</a></li>
 						<li> <hr class="dropdown-divider"></li>
 
 						<!-- Dark mode options START -->
@@ -220,7 +220,7 @@
 					   <div class="navbar navbar-expand-xl">
 						   <ul class="navbar-nav navbar-offcanvas-menu">
 
-							   <li class="nav-item"> <a class="nav-link" href="{{url('/admin')}}"><i class="bi bi-house-door fa-fw me-1"></i> Dashboard</a>	</li>
+							   <li class="nav-item"> <a class="nav-link" href="{{url('/Dashboard-agent')}}"><i class="bi bi-house-door fa-fw me-1"></i> Dashboard</a>	</li>
 
 							   <li class="nav-item"> <a class="nav-link" href="{{url('/admin/ListeArticle')}}"><i class="bi bi-list-ul"></i> Articles</a> </li>
 

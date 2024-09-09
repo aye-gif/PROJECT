@@ -407,10 +407,19 @@ class ClientController extends Controller
 
             $detailcommande = DB::table('suivie_commandes')->join('commandes', 'suivie_commandes.ref_commande', '=', 'commandes.ref_commande')
                                                ->where('suivie_commandes.ref_commande', $infocommande->ref_commande)
-                                               ->first(); 
+                                               ->first();
+                                               
+            $transactions = DB::table('transactions')->join('commandes', 'transactions.commande_id', '=', 'commandes.id')
+                                                    ->where('commandes.ref_commande', $infocommande->ref_commande)
+                                                    ->select('transactions.id', 'transactions.ref_transaction')
+                                                    ->selectRaw('(LENGTH(contenue) - LENGTH(REPLACE(contenue, ?, ?))) / LENGTH(?) as total_elements', ['"statut":0', '', '"statut":0'])
+                                                    ->selectRaw('(LENGTH(contenue) - LENGTH(REPLACE(contenue, ?, ?))) / LENGTH(?) as count_non_zero_status', ['"statut":1', '', '"statut":1'])
+                                                    ->get();
 
             // $detailcommande = SuivieCommande::where('ref_commande',$infocommande->ref_commande)->first();
-            return view('client.order-tracking',['detailcommande' => $detailcommande]);
+            return view('client.order-tracking',['detailcommande' => $detailcommande,
+                                                'suivie' => $transactions
+                                                ]);
         }
 
     }
@@ -418,10 +427,19 @@ class ClientController extends Controller
     public function ordercommande(Request $request){
             
         $infocommande = SuivieCommande::where('ref_commande',$request->input('NumeroCommande'))->first();
+
+        $transactions = DB::table('transactions')->join('commandes', 'transactions.commande_id', '=', 'commandes.id')
+                                                    ->where('commandes.ref_commande', $infocommande->ref_commande)
+                                                    ->select('transactions.id', 'transactions.ref_transaction')
+                                                    ->selectRaw('(LENGTH(contenue) - LENGTH(REPLACE(contenue, ?, ?))) / LENGTH(?) as total_elements', ['"statut":0', '', '"statut":0'])
+                                                    ->selectRaw('(LENGTH(contenue) - LENGTH(REPLACE(contenue, ?, ?))) / LENGTH(?) as count_non_zero_status', ['"statut":1', '', '"statut":1'])
+                                                    ->get();
         
         if($infocommande){
             $detailcommande = SuivieCommande::where('ref_commande',$request->input('NumeroCommande'))->first();
-             return view('client.order-tracking',['detailcommande' => $detailcommande]);
+             return view('client.order-tracking',['detailcommande' => $detailcommande,
+                                                     'suivie' => $transactions
+                                                ]);
         }
     }
     

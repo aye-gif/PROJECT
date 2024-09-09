@@ -72,11 +72,11 @@
                 <h3 class="font-weight-normal">0<small> Fcfa</small></h3>
               @endif
             </div>
-            {{-- <div class="form-group mb-4">
+            <div class="form-group mb-4">
               <label class="mb-3" for="order-comments"><span class="badge badge-info font-size-xs mr-2">Note</span><span class="font-weight-medium">Commentaires supplémentaires</span></label>
               <textarea class="form-control" rows="6" id="order-comments"></textarea>
-            </div> --}}
-            <div class="accordion" id="order-options">
+            </div>
+            {{-- <div class="accordion" id="order-options">
                 <div class="card">
                   <div class="card-header">
                     <h3 class="accordion-heading"><a href="#promo-code" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="promo-code">Ajouter un code promo<span class="accordion-indicator"></span></a></h3>
@@ -102,7 +102,7 @@
                     </form>
                   </div>
                 </div>
-            </div>
+            </div> --}}
             @if (Session::has('topCart'))
               </div class="form-group mb-4">
                 <a class="btn btn-primary btn-shadow btn-block mt-3" href="{{url('/client/checkout')}}"><i class="czi-card font-size-lg mr-2"></i> Passer à la caisse</a>

@@ -320,9 +320,9 @@
                <!-- Product-->
                 <div>
                   <div class="card product-card card-static"><span class="badge badge-{{ $resultat->couleur_statut}} badge-shadow">{{ $resultat->statut}}</span>
-                    <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="{{url('/favories',[$resultat->ref_article])}}" ><i class="czi-heart"></i></a></button><a class="card-img-top d-block overflow-hidden" href="{{url('/',[$resultat->ref_article])}}"><img src="{{ asset('img/shop/catalog/'.$resultat->image_article) }}" alt="Product"></a>
-                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="{{url('/',[$resultat->ref_article])}}">{{$resultat->type_article }}</a>
-                      <h3 class="product-title font-size-sm"><a href="{{url('/',[$resultat->ref_article])}}">{{$resultat->libelle_article }}</a></h3>
+                    <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="{{url('/favories',[$resultat->ref_article])}}" ><i class="czi-heart"></i></a></button><a class="card-img-top d-block overflow-hidden" href="{{url('/article',[$resultat->id])}}"><img src="{{ asset('img/shop/catalog/'.$resultat->image_article) }}" alt="Product"></a>
+                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="{{url('/article',[$resultat->id])}}">{{$resultat->type_article }}</a>
+                      <h3 class="product-title font-size-sm"><a href="{{url('/article',[$resultat->id])}}">{{$resultat->libelle_article }}</a></h3>
                       <div class="d-flex justify-content-between">
                         <div class="product-price"><span class="text-accent">{{number_format($resultat->prix,2,",",".") }}<small> Fcfa</small></span>
                         </div>
@@ -338,9 +338,9 @@
                 <!-- Product-->
                 <div>
                   <div class="card product-card card-static"><span class="badge badge-{{ $resultat->couleur_statut}} badge-shadow">{{ $resultat->statut}}</span>
-                    <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="#" ><i class="czi-heart"></i></a></button><a class="card-img-top d-block overflow-hidden" href="{{url('/',[$resultat->ref_article])}}"><img src="{{ asset('img/shop/catalog/'.$resultat->image_article) }}" alt="Product"></a>
-                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="{{url('/',[$resultat->ref_article])}}">{{$resultat->type_article }}</a>
-                      <h3 class="product-title font-size-sm"><a href="{{url('/',[$resultat->ref_article])}}">{{$resultat->libelle_article }}</a></h3>
+                    <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="#" ><i class="czi-heart"></i></a></button><a class="card-img-top d-block overflow-hidden" href="{{url('/article',[$resultat->id])}}"><img src="{{ asset('img/shop/catalog/'.$resultat->image_article) }}" alt="Product"></a>
+                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="{{url('/article',[$resultat->id])}}">{{$resultat->type_article }}</a>
+                      <h3 class="product-title font-size-sm"><a href="{{url('/article',[$resultat->id])}}">{{$resultat->libelle_article }}</a></h3>
                       <div class="d-flex justify-content-between">
                         <div class="product-price"><span class="text-accent">{{number_format($resultat->prix,2,",",".") }}<small> Fcfa</small></span>
                         </div>
@@ -376,9 +376,9 @@
                <!-- Product-->
                 <div>
                   <div class="card product-card card-static"><span class="badge badge-{{ $resultat->couleur_statut}} badge-shadow">{{ $resultat->statut}}</span>
-                    <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="{{url('/favories',[$resultat->ref_article])}}" ><i class="czi-heart"></i></a></button><a class="card-img-top d-block overflow-hidden" href="{{url('/',[$resultat->ref_article])}}"><img src="{{ asset('img/shop/catalog/'.$resultat->image_article) }}" alt="Product"></a>
-                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="{{url('/',[$resultat->ref_article])}}">{{$resultat->type_article }}</a>
-                      <h3 class="product-title font-size-sm"><a href="{{url('/',[$resultat->ref_article])}}">{{$resultat->libelle_article }}</a></h3>
+                    <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="{{url('/favories',[$resultat->ref_article])}}" ><i class="czi-heart"></i></a></button><a class="card-img-top d-block overflow-hidden" href="{{url('/article',[$resultat->id])}}"><img src="{{ asset('img/shop/catalog/'.$resultat->image_article) }}" alt="Product"></a>
+                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="{{url('/article',[$resultat->id])}}">{{$resultat->type_article }}</a>
+                      <h3 class="product-title font-size-sm"><a href="{{url('/article',[$resultat->id])}}">{{$resultat->libelle_article }}</a></h3>
                       <div class="d-flex justify-content-between">
                         <div class="product-price"><span class="text-accent">{{number_format($resultat->prix,2,",",".") }}<small> Fcfa</small></span>
                         </div>
@@ -394,9 +394,9 @@
                 <!-- Product-->
                 <div>
                   <div class="card product-card card-static"><span class="badge badge-{{ $resultat->couleur_statut}} badge-shadow">{{ $resultat->statut}}</span>
-                    <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="#" ><i class="czi-heart"></i></a></button><a class="card-img-top d-block overflow-hidden" href="{{url('/',[$resultat->ref_article])}}"><img src="{{ asset('img/shop/catalog/'.$resultat->image_article) }}" alt="Product"></a>
-                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="{{url('/',[$resultat->ref_article])}}">{{$resultat->type_article }}</a>
-                      <h3 class="product-title font-size-sm"><a href="{{url('/',[$resultat->ref_article])}}">{{$resultat->libelle_article }}</a></h3>
+                    <button class="btn-wishlist btn-sm" data-toggle="tooltip" data-placement="left" title="Ajouter aux favories"><a href="#" ><i class="czi-heart"></i></a></button><a class="card-img-top d-block overflow-hidden" href="{{url('/article',[$resultat->id])}}"><img src="{{ asset('img/shop/catalog/'.$resultat->image_article) }}" alt="Product"></a>
+                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="{{url('/article',[$resultat->id])}}">{{$resultat->type_article }}</a>
+                      <h3 class="product-title font-size-sm"><a href="{{url('/article',[$resultat->id])}}">{{$resultat->libelle_article }}</a></h3>
                       <div class="d-flex justify-content-between">
                         <div class="product-price"><span class="text-accent">{{number_format($resultat->prix,2,",",".") }}<small> Fcfa</small></span>
                         </div>

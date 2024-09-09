@@ -33,7 +33,13 @@ use App\Http\Controllers\PaiementCinetpayController;
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
 
     //pour acceder a la page de connexion admin
+    Route::get('/Dashboard-agent', [AdminController::class, 'PageAgent']);
+
+    //pour acceder a la page de connexion admin
     Route::get('/admin', [AdminController::class, 'admin']);
+
+    //pour acceder
+    Route::get('/lagoutAdmin', [AdminController::class, 'logoutAdmin']);
 
     //pour acceder au tableau de bord admin
     Route::post('/adminaccount', [AdminController::class, 'adminaccount']);

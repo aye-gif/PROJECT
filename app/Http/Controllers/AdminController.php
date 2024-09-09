@@ -35,6 +35,50 @@ class AdminController extends Controller
     }
 
     //pour la connexion au compte admin
+    public function PageAgent(){
+
+        // Obtenir la date du jour au format 'YYYY-MM-DD'
+        $today = Carbon::now()->format('Y-m-d');
+
+        // Effectuer la requête pour obtenir les transactions du jour
+        $transactions = DB::table('transactions')
+                            ->join('commandes','commandes.id','=','transactions.commande_id')
+                            ->join('clients','clients.id','=','commandes.client_id')
+                            ->whereRaw("JSON_CONTAINS(contenue, JSON_OBJECT('date', ?), '$')", [$today])
+                            ->get();
+
+        // cette requete me permet d'afficher les commandes
+        $affiche_comandes = DB::table('commandes')->join('clients','clients.id','=','commandes.client_id')
+                                                  ->select('commandes.*', 'clients.nom', 'clients.prenoms', 'clients.telephone')
+                                                  ->get();
+
+        // cette requete me permet d'afficher les clients
+        $affiche_client = Client::All();
+
+        // cette requete me permet d'afficher les favories
+        $affiche_favorie = Favorie::All();
+
+        // cette requete me permet d'afficher les fournisseurs
+        $affiche_fournisseur = Fournisseur::All();
+
+        $affiche_comandes->transform(function($affiche_cart, $key){
+                $affiche_cart->cart = unserialize($affiche_cart->cart);
+
+            return $affiche_cart;
+        });
+
+        return view('admin.agent-dashboard',[
+                    'affiche_comandes' => $affiche_comandes,
+                    'affiche_client' => $affiche_client,
+                    'affiche_favorie' => $affiche_favorie,
+                    'affiche_fournisseur' => $affiche_fournisseur,
+                    'affiche_transactions' => $transactions,
+                    'affiche_date' => $today,
+                ]);
+
+    }
+
+    //pour la connexion au compte admin
     public function adminaccount(Request $request){
 
         $this->validate($request,[
@@ -91,58 +135,6 @@ class AdminController extends Controller
 
             
         }
-        
-
-        // $this->validate($request,[
-            
-        //     'emailadmin' => 'email|required'
-        // ]);
-
-        // $admin = Admin::where('email',$request->emailadmin)->where('password',$request->passwordadmin)->first();
-        // if($admin){
-        //         // Session::put('admin',$admin);
-
-        //     // Obtenir la date du jour au format 'YYYY-MM-DD'
-        //     $today = Carbon::now()->format('Y-m-d');
-
-        //     // Effectuer la requête pour obtenir les transactions du jour
-        //     $transactions = DB::table('transactions')
-        //                         ->join('commandes','commandes.id','=','transactions.commande_id')
-        //                         ->join('clients','clients.id','=','commandes.client_id')
-        //                         ->whereRaw("JSON_CONTAINS(contenue, JSON_OBJECT('date', ?), '$')", [$today])
-        //                         ->get();
-
-        //     // cette requete me permet d'afficher les commandes
-        //     $affiche_comandes = DB::table('commandes')->join('clients','clients.id','=','commandes.client_id')
-        //                                               ->select('commandes.*', 'clients.nom', 'clients.prenoms', 'clients.telephone')
-        //                                               ->get();
-
-        //     // cette requete me permet d'afficher les clients
-        //     $affiche_client = Client::All();
-
-        //     // cette requete me permet d'afficher les favories
-        //     $affiche_favorie = Favorie::All();
-
-        //     // cette requete me permet d'afficher les fournisseurs
-        //     $affiche_fournisseur = Fournisseur::All();
-
-        //     $affiche_comandes->transform(function($affiche_cart, $key){
-        //             $affiche_cart->cart = unserialize($affiche_cart->cart);
-
-        //         return $affiche_cart;
-        //     });
-
-        //     return view('admin.agent-dashboard',[
-        //         'affiche_comandes' => $affiche_comandes,
-        //         'affiche_client' => $affiche_client,
-        //         'affiche_favorie' => $affiche_favorie,
-        //         'affiche_fournisseur' => $affiche_fournisseur,
-        //         'affiche_transactions' => $transactions,
-        //         'affiche_date' => $today,
-        //     ]);
-        // }
-
-        // // return back()->with('error', "Vous n'avez pas de compte avec cet email");
 
     }
 
@@ -182,6 +174,7 @@ class AdminController extends Controller
         
         // Deuxième requête : Sélectionner toutes les classes où le professeur a l'ID 1
         $affiche_article = DB::table('articles')->join('categories', 'categories.id', '=', 'articles.categorie_id')
+                                                ->select('articles.id','articles.ref_article','categories.libelle_categorie','articles.type_article','articles.libelle_article','articles.prix')
                                                 ->get();
 
         // // cette requete me permet d'afficher les categories
@@ -404,6 +397,13 @@ class AdminController extends Controller
         }
 
         return back(); 
+    }
+
+    //pour la connexion au compte utilisateur
+    public function logoutAdmin(){
+
+        Session::forget('admin');
+       return redirect('/admin');
     }
 
 }

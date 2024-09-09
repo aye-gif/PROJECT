@@ -231,9 +231,11 @@
       </div><br>
       <div class="d-sm-flex flex-wrap justify-content-between align-items-center text-center pt-4">
         <div class="custom-control custom-checkbox mt-2 mr-3">
-          <h2 class="h6 pb-3 mb-2">Nombre total de jour : </h2>  
-          <h2 class="h6 pb-3 mb-2">Nombre jour déja payé :</h2> 
-          <h2 class="h6 pb-3 mb-2">Nombre jour restant :</h2>        
+          @foreach($suivie as $transaction)
+            <h2 class="h6 pb-3 mb-2">Nombre total de jour : <span class="text-primary">{{ $transaction->total_elements +  $transaction->count_non_zero_status}}</span>  jours</h2>  
+            <h2 class="h6 pb-3 mb-2">Nombre jour déja payé : <span class="text-primary">{{ $transaction->count_non_zero_status - 0}}</span> jours</h2> 
+            <h2 class="h6 pb-3 mb-2">Nombre jour restant : <span class="text-primary">{{ ($transaction->total_elements +  $transaction->count_non_zero_status ) -  $transaction->count_non_zero_status }}</span> jours</h2> 
+          @endforeach       
         </div>
       </div>
       

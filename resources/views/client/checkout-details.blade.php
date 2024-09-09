@@ -55,25 +55,25 @@
             <ul class="list-unstyled font-size-sm pb-2 border-bottom">
               <li class="d-flex justify-content-between align-items-center"><span class="mr-2">Total :</span><span class="text-right">{{Session::get('cart')->totalPrice}}<small> Fcfa</small></span></li>
               <li class="d-flex justify-content-between align-items-center"><span class="mr-2">Frais livraison :</span><span class="text-right">—</span></li>
-            @if (Session::has('CodePromo'))
-                      <li class="d-flex justify-content-between align-items-center"><span class="mr-2">Réduction :</span><span class="text-right">- {{Session('ValeurPromo')}}</span></li>
-                    @else
-                      <li class="d-flex justify-content-between align-items-center"><span class="mr-2">Réduction :</span><span class="text-right">—<small></small></span></li>
-            @endif
-              
-                <h3 class="font-weight-normal text-center my-4">{{number_format(Session::get('cart')->totalPrice - Session::get('ValeurPromo'),0,",",".")}}<small> Fcfa</small></h3>
-            @if (Session::has('CodePromo'))
-            
-            @else
-              <form class="card-body needs-validation" action="{{url('CodePromo')}}" method="post" novalidate>
-                @csrf
-                <div class="form-group">
-                  <input class="form-control" type="text" placeholder="Promo code" name="CodePromo" required>
-                  <div class="invalid-feedback">Veuillez fournir le code promotionnel.</div>
-                </div>
-                <button class="btn btn-outline-primary btn-block" type="submit">Valider</button>
-              </form>
-            @endif
+                {{-- @if (Session::has('CodePromo'))
+                          <li class="d-flex justify-content-between align-items-center"><span class="mr-2">Réduction :</span><span class="text-right">- {{Session('ValeurPromo')}}</span></li>
+                        @else
+                          <li class="d-flex justify-content-between align-items-center"><span class="mr-2">Réduction :</span><span class="text-right">—<small></small></span></li>
+                @endif
+                  
+                    <h3 class="font-weight-normal text-center my-4">{{number_format(Session::get('cart')->totalPrice - Session::get('ValeurPromo'),0,",",".")}}<small> Fcfa</small></h3>
+                @if (Session::has('CodePromo'))
+                
+                @else
+                  <form class="card-body needs-validation" action="{{url('CodePromo')}}" method="post" novalidate>
+                    @csrf
+                    <div class="form-group">
+                      <input class="form-control" type="text" placeholder="Promo code" name="CodePromo" required>
+                      <div class="invalid-feedback">Veuillez fournir le code promotionnel.</div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-block" type="submit">Valider</button>
+                  </form>
+                @endif --}}
           </div>
         </aside>
 

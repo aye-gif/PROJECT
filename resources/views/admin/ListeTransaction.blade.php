@@ -71,7 +71,7 @@ Content START -->
                                 <!-- Table head -->
                                 <thead class="table-dark">
                                     <tr>
-										<th scope="col" class="border-0 rounded-start">#</th>
+										<th scope="col" class="border-0 rounded-start text-center">Transac</th>
 										<th scope="col" class="border-0 text-center">Montant à payer</th>
 										<th scope="col" class="border-0 text-center">Date</th>
 										<th scope="col" class="border-0 text-center">Statut</th>
