@@ -23,15 +23,15 @@ class PagesController extends Controller
     public function home(){   
         // c'est deux requetes ci-dessous me permettrons d'afficher le 12 premiers articles femmes 
         $articles_6_f = Article::where('id','<=','6')->get();
-        $articles_12_f = Article::where('id','<=','12')->orderBy('id', 'desc')->take(6)->get();
+        $articles_12_f = Article::whereBetween('id', [7, 12])->get();
 
         // c'est deux requetes ci-dessous me permettrons d'afficher le 12 premiers articles homme
         $articles_6_h = Article::where('id','>=','13')->take(6)->get();
-        $articles_12_h = Article::where('id','<=','24')->orderBy('id', 'desc')->take(6)->get();
+        $articles_12_h = Article::whereBetween('id', [14, 24])->get();
 
         // c'est deux requetes ci-dessous me permettrons d'afficher le 12 premiers articles enfant
         $articles_6_e = Article::where('id','>=','25')->take(6)->get();
-        $articles_12_e = Article::where('id','<=','37')->orderBy('id', 'desc')->take(6)->get();
+        $articles_12_e = Article::whereBetween('id', [26, 37])->get();
 
         // cette requete me permet d'afficher 5 articles de statut bestsellers
         $articles_bestsellers = Article::where('statut','=','bestsellers')->take(5)->get();
