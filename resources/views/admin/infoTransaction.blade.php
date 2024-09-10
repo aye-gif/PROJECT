@@ -76,7 +76,7 @@ Content START -->
                                                             <td class="text-center">{{ \Carbon\Carbon::parse($resultat2['date'])->format('d-m-Y') }}</td>
                                                             <td class="text-center"><div class="badge text-center text-bg-{{ $resultat2['statut'] == 0 ? 'warning' : 'success'}}"> {{ $resultat2['statut'] == 0 ? 'Non payé' : 'Payé' }}</div></td>
                                                             <td class="text-center">
-                                                                <a href="{{ url('/admin/TransactionValidate', [ $resultat->id , $resultat2['id'] ]) }}" class="btn btn-sm btn-light mb-0">Valider</a>
+                                                                <a href="{{ url('/admin/TransactionValidate', [ $resultat->id , $resultat2['id'] ]) }}" class="btn btn-sm btn-light mb-0 validate-transaction">Valider</a>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -125,6 +125,22 @@ Content START -->
 </section>
 <!-- =======================
 Content END -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const validateButtons = document.querySelectorAll('.validate-transaction');
+        
+        validateButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (confirm('Êtes-vous sûr de vouloir valider cette transaction ?')) {
+                    window.location.href = this.getAttribute('href');
+                }
+            });
+        });
+    });
+</script>
 
 <!-- **************** MAIN CONTENT END **************** -->
 @include('admin.fooster')

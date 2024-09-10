@@ -339,7 +339,7 @@ class ClientController extends Controller
         $nombreJour = floor(Session('cart')->totalPrice / Session('MethodPay')); 
 
         $aujourdhui = Carbon::now();
-        $dateLivraison = $aujourdhui->addDays($nombreJour + 1);
+        $dateLivraison = $aujourdhui->addDays($nombreJour);
 
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
@@ -363,7 +363,7 @@ class ClientController extends Controller
         // Initialiser un tableau pour stocker les enregistrements
         $Transaction = []; 
 
-        for ($i=1; $i <= $nombreJour; $i++) { 
+        for ($i=0; $i < $nombreJour; $i++) { 
             # code...
             $Transaction[] = [
                 'id' => $i,

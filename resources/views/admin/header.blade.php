@@ -98,7 +98,7 @@
 	<nav class="navbar navbar-expand-xl">
 		<div class="container">
 			<!-- Logo START -->
-			<a class="navbar-brand" href="{{url('/')}}">
+			<a class="navbar-brand" href="{{url('/admin')}}">
 				<img class="light-mode-item navbar-brand-item" src="../../img/logo.png" alt="MPYSTORE">
 				<img class="dark-mode-item navbar-brand-item" src="../../img/logo.png" alt="MPYSTORE">
 			</a>
