@@ -366,10 +366,13 @@ class AdminController extends Controller
         // cette requete me permet d'afficher les commandes du clients
         $affiche_info_transaction = DB::table('commandes')->join('transactions','transactions.commande_id','=','commandes.id')
                                                           ->where('commande_id','=',$id)
-                                                          ->paginate(30);
+                                                          ->get();
+        // cette requete me permet d'afficher les commandes du clients
+        $affiche_ref = Commande::where('id',$id)->first();
 
         return view('admin.infoTransaction',[
-            'affiche_liste_transaction' =>  $affiche_info_transaction
+            'affiche_liste_transaction' =>  $affiche_info_transaction,
+            'affiche_ref_transaction' =>  $affiche_ref,
         ]); 
     }
 

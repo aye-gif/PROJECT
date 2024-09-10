@@ -13,6 +13,7 @@ Content START -->
                         <div class="card-header border-bottom">
                             <div class="d-sm-flex justify-content-between align-items-center">
                                 <h5 class="mb-2 mb-sm-0">Liste des clients</h5>	
+                                <h5 class="mb-2 mb-sm-0"><a href="{{url('/client/order',[$affiche_ref_transaction->ref_commande])}}">http://127.0.0.1:8000/client/order/{{ $affiche_ref_transaction->ref_commande}}</a></h5>	
                             </div>
                         </div>
                         <!-- Card header END -->
@@ -21,7 +22,7 @@ Content START -->
                         <div class="card-body">
                             <!-- Search and select START -->
                             <div class="row g-3 align-items-center justify-content-between mb-3">
-                                <!-- Search -->
+                                {{-- <!-- Search -->
                                 <div class="col-md-8">
                                     <form class="rounded position-relative">
                                         <input class="form-control pe-5" type="search" placeholder="Search" aria-label="Search">
@@ -40,7 +41,7 @@ Content START -->
                                             <option>Oldest</option>
                                         </select>
                                     </form>
-                                </div>
+                                </div> --}}
                             </div>
                             <!-- Search and select END -->
 
