@@ -12,7 +12,7 @@
           <h1 class="h3">404 error</h1>
           <h3 class="h5 font-weight-normal mb-4">We can't seem to find the page you are looking for.</h3>
           <p class="font-size-md mb-4">
-            <u>Here are some helpful links instead:</u>
+            <u>Here are some helpful test links instead:</u>
           </p>
         </div>
       </div>
